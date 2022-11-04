@@ -37,7 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@firebolt-js/openrpc": "^1.7.0-next.3",
+    "@firebolt-js/openrpc": "git://github.com/rdkcentral/firebolt-openrpc.git#feature/http-methods",
     "@firebolt-js/schemas": "^0.5.0-next.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
