@@ -1,6 +1,6 @@
 {
   "name": "@firebolt-js/sdk",
-  "version": "0.10.0-beta.1",
+  "version": "0.10.0-beta.3",
   "description": "The Firebolt JS SDK",
   "main": "./dist/lib/firebolt.mjs",
   "types": "./dist/lib/firebolt.d.ts",
@@ -29,7 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/rdkcentral/firebolt-core-sdk"
   },
-  "author": "^1.7.0-next.2",
+  "author": "",
   "bugs": {
     "url": "https://github.com/rdkcentral/firebolt-core-sdk/issues"
   },
@@ -38,7 +38,7 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@firebolt-js/openrpc": "git://github.com/rdkcentral/firebolt-openrpc.git#feature/http-methods",
-    "@firebolt-js/schemas": "^0.5.0-next.0",
+    "@firebolt-js/schemas": "^0.5.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^9.0.1",
