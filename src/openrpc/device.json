@@ -760,12 +760,15 @@
   "components": {
     "schemas": {
       "Resolution": {
+        "title": "Resolution",
         "type": "array",
         "items": [
           {
+            "x-property": "width",
             "type": "integer"
           },
           {
+            "x-property": "height",
             "type": "integer"
           }
         ],
