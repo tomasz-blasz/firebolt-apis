@@ -43,7 +43,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "supported",
                         "value": true
                     }
                 },
@@ -56,7 +56,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "supported",
                         "value": false
                     }
                 }
@@ -99,7 +99,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "available",
                         "value": true
                     }
                 },
@@ -112,7 +112,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "available",
                         "value": false
                     }
                 }
@@ -162,7 +162,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "permitted",
                         "value": true
                     }
                 },
@@ -181,7 +181,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "permitted",
                         "value": false
                     }
                 },
@@ -194,7 +194,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "permitted",
                         "value": false
                     }
                 }
@@ -251,7 +251,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "granted",
                         "value": true
                     }
                 },
@@ -264,7 +264,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "granted",
                         "value": false
                     }
                 },
@@ -277,7 +277,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "gratned",
                         "value": null
                     }
                 }
@@ -320,7 +320,7 @@
             },
             "examples": [
                 {
-                    "name": "Default result",
+                    "name": "info",
                     "params": [
                         {
                             "name": "capabilities",
@@ -338,7 +338,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "info",
                         "value": [
                             {
                                 "capability": "xrn:firebolt:capability:device:model",
@@ -563,7 +563,7 @@
                 }
             ],
             "result": {
-                "name": "Default Result",
+                "name": "info",
                 "summary": "Returns an array of CapabilityInfo objects for the passed in capabilities.",
                 "schema": {
                     "type": "array",
@@ -575,7 +575,7 @@
             },
             "examples": [
                 {
-                    "name": "Default result",
+                    "name": "info",
                     "params": [
                         {
                             "name": "grants",
@@ -588,7 +588,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "info",
                         "value": [
                             {
                                 "capability": "xrn:firebolt:capability:commerce:purchase",
@@ -652,7 +652,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default result",
+                        "name": "value",
                         "value": {
                             "capability": "xrn:firebolt:capability:token:platform",
                             "supported": true,
@@ -717,7 +717,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "value",
                         "value": {
                             "capability": "xrn:firebolt:capability:token:platform",
                             "supported": true,
@@ -793,7 +793,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "value",
                         "value": {
                             "capability": "xrn:firebolt:capability:localization:postal-code",
                             "supported": true,
@@ -866,7 +866,7 @@
                         }
                     ],
                     "result": {
-                        "name": "Default Result",
+                        "name": "value",
                         "value": {
                             "capability": "xrn:firebolt:capability:localization:postal-code",
                             "supported": true,
