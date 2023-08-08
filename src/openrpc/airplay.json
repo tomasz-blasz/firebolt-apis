@@ -1,0 +1,219 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+      "title": "AirPlay",
+      "description": "Module for management of AirPlay 2.0 functionality.",
+      "version": "0.0.0"
+    },
+    "methods": [
+      {
+        "name": "enabled",
+        "tags": [
+          {
+            "name": "property:readonly"
+          },
+          {
+            "name": "capabilities",
+            "x-manages": [
+              "xrn:firebolt:capability:airplay:process"
+            ]
+          }
+        ],
+        "summary": "Whether AirPlay is enabled or not.",
+        "params": [
+        ],
+        "result": {
+          "name": "enabled",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        "examples": [
+          {
+            "name": "Default Example",
+            "params": [
+            ],
+            "result": {
+              "name": "enabled",
+              "value": true
+            }
+          },
+          {
+            "name": "Default Example #2",
+            "params": [
+            ],
+            "result": {
+              "name": "enabled",
+              "value": false
+            }
+          }
+        ]    
+      },
+      {
+        "name": "connected",
+        "tags": [
+          {
+            "name": "property:readonly"
+          },
+          {
+            "name": "capabilities",
+            "x-manages": [
+              "xrn:firebolt:capability:airplay:process"
+            ]
+          }
+        ],
+        "summary": "Whether AirPlay is enabled or not.",
+        "params": [
+        ],
+        "result": {
+          "name": "connected",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        "examples": [
+          {
+            "name": "Default Example",
+            "params": [
+            ],
+            "result": {
+              "name": "connected",
+              "value": true
+            }
+          },
+          {
+            "name": "Default Example #2",
+            "params": [
+            ],
+            "result": {
+              "name": "connected",
+              "value": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "paired",
+        "tags": [
+          {
+            "name": "property:readonly"
+          },
+          {
+            "name": "capabilities",
+            "x-manages": [
+              "xrn:firebolt:capability:airplay:process"
+            ]
+          }
+        ],
+        "summary": "Whether AirPlay is paired with HomeKit or not.",
+        "params": [
+        ],
+        "result": {
+          "name": "paired",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        "examples": [
+          {
+            "name": "Default Example",
+            "params": [
+            ],
+            "result": {
+              "name": "paired",
+              "value": true
+            }
+          },
+          {
+            "name": "Default Example #2",
+            "params": [
+            ],
+            "result": {
+              "name": "paired",
+              "value": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "onRequestSettings",
+        "tags": [
+          {
+            "name": "capabilities",
+            "x-provides": "xrn:firebolt:capability:airplay:experience"
+          }
+        ],
+        "summary": "Provider API to display the AirPlay settings UI.",
+        "params": [
+        ],
+        "result": {
+          "name": "default",
+          "schema": {
+            "type": "null"
+          }
+        },
+        "examples": [
+          {
+            "name": "Default Example",
+            "params": [
+            ],
+            "result": {
+              "name": "default",
+              "value": null
+            }
+          },
+          {
+            "name": "Default Example #2",
+            "params": [
+            ],
+            "result": {
+              "name": "default",
+              "value": null
+            }
+          }
+        ]        
+      },
+      {
+        "name": "onRequestPlayer",
+        "tags": [
+          {
+            "name": "capabilities",
+            "x-provides": "xrn:firebolt:capability:airplay:experience"
+          }
+        ],
+        "summary": "Provider API to display the AirPlay player UI.",
+        "params": [
+        ],
+        "result": {
+          "name": "default",
+          "schema": {
+            "type": "null"
+          }
+        },
+        "examples": [
+          {
+            "name": "Default Example",
+            "params": [
+            ],
+            "result": {
+              "name": "default",
+              "value": null
+            }
+          },
+          {
+            "name": "Default Example #2",
+            "params": [
+            ],
+            "result": {
+              "name": "default",
+              "value": null
+            }
+          }
+        ]        
+      }      
+    ],
+    "components": {
+      "schemas": {    
+      }
+    }
+  }
