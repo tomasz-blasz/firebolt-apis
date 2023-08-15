@@ -1,3 +1,81 @@
+## 4. HDMI Input Sources
+The `HDMIInput` module **MUST** have a `sources` method that lists all HDMI input sources contected to the device.
+
+The `sources` API **MUST** return an array of `HDMISource objects.
+
+The properties of each `HDMISource` object **MUST** have values that represent the cross product of the physical port and the input source device plugged into it.
+
+An example response:
+
+```json
+[
+    {
+        "port": "HDMI1",
+        "osdName": "PlayStation 4",
+        "cecVersion": "Version 2.0",
+        "logicalAddress": 4,
+        "physicalAddress": "A.B.C.D",
+        "arc": true
+    }
+]
+```
+
+**TODO**: physical address hex or decimal? if hex caps or lower case strings?
+
+The `HDMISource` object **MUST** have a `port` string property, which is the unique ID of the port the source device is connected through.
+
+The `port` property **MUST** match the pattern:
+
+ ```regexp
+ /^HDMI[0-9]+$/
+ ```
+
+The `HDMISource` object **MUST** have an `osdName` string property, which is the display name of the HDMI input source device.
+
+The `HDMISource` object **MUST** have a `cecVersion` string proeprty, which is the CEC version protocol advertised by the HDMI input source device.
+
+The `cecVersion` property **MUST** be one of the following values:
+
+- `"unknown"` - unknown version
+- `"Version 1.3a"`
+- `"Version 1.4"` - Version 1.4, 1.4a or 1.4b.
+- `"Version 2.0"`
+
+The `HDMISource` object **MUST** have a `logicalAddress` integer property, which is the logical HDMI address of the input source device within the scope of this output sink device.
+
+
+The `HDMISource` object **MUST** have a `physicalAddress` string property, which is the physical HDMI address of the port the input source device is connected to.
+
+**TODO**: Is "bus" the best word?
+
+The `physicalAddress` property **MUST** match the pattern:
+
+ ```regexp
+ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/
+ ```
+
+The `HDMISource` object **MUST** have an `arc` boolean property, which is true if this HDMI port and the connected HDMI device both support ARC and/or eARC device connections.
+
+The `HDMISource` object **MUST** have an `autoLowLatencyMode` boolean property, which is true if the connected HDMI device is signalling ALLM.
+
+### 4.1. Get Source by Logical Address
+The `HDMIInput` module **MUST** have a `getSourceByLogicalAddress` method that returns info on a single HDMI source device.
+
+The `getSourceByLogicalAddress` API **MUST** return an `HDMISource` object that corresponds to the provided `logicalAddress` parameter.
+
+```javascript
+HDMIInput.getSourceByLogicalAddress(1)
+```
+
+### 4.2. Get Source by Physical Address
+The `HDMIInput` module **MUST** have a `getSourceByPhysicalAddress` method that returns info on a single HDMI source device.
+
+The `getSourceByPhysicalAddress` API **MUST** return an `HDMISource` object that corresponds to the provided `physicalAddress` parameter.
+
+```javascript
+HDMIInput.getSourceByPhysicalAddress("A.B.C.D")
+```
+
 ## 10. HDMI CEC Events
 AS has a very basic model compared to the HDMI 2.1 spec...
 
