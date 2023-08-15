@@ -76,6 +76,30 @@ The `getSourceByPhysicalAddress` API **MUST** return an `HDMISource` object that
 HDMIInput.getSourceByPhysicalAddress("A.B.C.D")
 ```
 
+## 7. Input Source OSD Name Notification
+The `HDMIInput` module **MUST** have an `onSourceOSDNameChanged` notification that fires when any HDMI input device changes its OSD Name.
+
+This notification **MUST** have an object payload.
+
+The object payload **MUST** have a `port` string property that denotes which input port has detected a change to the ALLM signaling.
+
+The `port` property **MUST** match the pattern:
+
+ ```regexp
+ /^HDMI[0-9]+$/
+ ```
+
+The object payload **MUST** have an `osdName` string property that denotes the updated value of the input device OSD Name.
+
+Example payload:
+
+```json
+  {
+      "port": "HDMI1",
+      "osdName": "XBox"
+  }
+```
+
 ## 10. HDMI CEC Events
 AS has a very basic model compared to the HDMI 2.1 spec...
 
