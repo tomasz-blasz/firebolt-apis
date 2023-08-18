@@ -41,6 +41,12 @@ An app **MUST** have permission to the `use` role of the `xrn:firebolt:capabilit
 
 When the `launch` method is successfully called, the platform **MUST** check if the provided `appId` resolves to an app that shares the same `appPublisherId` as the app calling `launch`. If so then the platform **MUST** attempt to launch the app denoted by `appId`. If not, then the call **MUST** return an error.
 
+TODO: Do we want this API limited by:
+
+- Same App Publisher and each app's friendlyId in app manifest
+- A list of friendlyIds -> distP ids in the Manifest
+- User Grants and
+
 ## Reserved App Ids
 All Firebolt APIs exposed for building Firebolt Apps **MUST** be exposed as JSON-RPC methods on a WebSocket accessible to the device, typically running locally.
 
