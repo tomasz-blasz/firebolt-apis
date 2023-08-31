@@ -5,7 +5,7 @@ Document Status: Draft
 See [Firebolt Requirements Governance](../../governance.md) for more info.
 
 | Contributor              | Organization   |
-| --------=====----------- | -------------- |
+| ------------------------ | -------------- |
 | Ramasamy Thalavay Pillai | Comcast        |
 | Tim Dibben               | Sky            |
 | Jeremy LaCivita          | Comcast        |
@@ -29,18 +29,21 @@ The key words "**MUST**", "**MUST NOT**", "**REQUIRED**", "**SHALL**", "**SHALL 
 ## 2. Table of Contents
 - [1. Overview](#1-overview)
 - [2. Table of Contents](#2-table-of-contents)
-- [3. Enabled](#3-enabled)
-- [4. Connected](#4-connected)
-- [5. Paired](#5-paired)
-- [6. Player UI](#6-player-ui)
-- [7. Settings UI](#7-settings-ui)
-- [8. AirPlay Experience Provider](#8-airplay-experience-provider)
-  - [8.1. Player](#81-player)
-  - [8.2. Settings](#82-settings)
-- [9. AirPlay Process Provider](#9-airplay-process-provider)
-  - [9.1. Enabled](#91-enabled)
+- [3. AirPlay APIs](#3-airplay-apis)
+  - [3.1. Enabled](#31-enabled)
+  - [3.2. Paired](#32-paired)
+  - [3.3. State](#33-state)
+- [4. AirPlay Process Provider](#4-airplay-process-provider)
+  - [4.1. Enabled](#41-enabled)
+  - [4.2. Paired](#42-paired)
+- [5. AirPlay Experience Provider](#5-airplay-experience-provider)
+  - [5.1. State](#51-state)
+  - [5.2. Player](#52-player)
+  - [5.3. Settings](#53-settings)
 
-## 3. Enabled
+## 3. AirPlay APIs
+
+### 3.1. Enabled
 AirPlay 2 manages it's own settings via Apple's AirPlay Luna App SDK.
 
 Apple does not expose setters for any AirPlay settings, only getters, so the Firebolt API reflects that.
@@ -49,31 +52,43 @@ The `AirPlay` module **MUST** have an `enabled` boolean property that is `readon
 
 The `enabled` property **MUST** return the value from the `<INSERT AIRPLAY API HERE>` API.
 
-## 4. Connected
-The `AirPlay` module **MUST** have a `connected` boolean property that is `readonly`. This value has a corresponding notification for when the paired status changes.
-
-The `connected` property **MUST** return whether an AirPlay device on the network is connected, e.g.:
-
-- Screen mirroring
-- Audio streaming
-- Video streaming
-
-## 5. Paired
+### 3.2. Paired
 The `AirPlay` module **MUST** have a `paired` boolean property that is `readonly`. This value has a corresponding notification for when the paired status changes.
 
 The `paired` property **MUST** return whether the Firebolt device is paired to an AirPlay HomeKit cloud account.
 
-## 6. Player UI
-The `AirPlay` module **MUST** have a `player` method.
+### 3.3. State
+The `AirPlay` module **MUST** have a `state` string property that is `readonly`. This value has a corresponding notification for when the AirPlay App state changes.
 
-The `player` method **MUST** attempt to display the AirPlay App Setting UI, see [Player](#81-settings) below.
+The `paired` property **MUST** return whether the Firebolt device is paired to an AirPlay HomeKit cloud account.
 
-## 7. Settings UI
-The `AirPlay` module **MUST** have a `settings` method.
+## 4. AirPlay Process Provider
 
-The `settings` method **MUST** attempt to display the AirPlay App Setting UI, see [Settings](#82-settings) below.
+The AirPlay Daemon **MUST** register as a provider for the `xrn:firebolt:capability:airplay:process` capability.
 
-## 8. AirPlay Experience Provider
+```typescript
+interface AirPlayProcess {
+  enabled(): Promise<boolean>
+  onEnabledChanged(): Promise<boolean>
+  paired(): Promise<boolean>
+  onPairedChanged(): Promise<boolean>
+  launch(): Promise<void>
+  background(): Promise<void>
+  close(): Promise<void>
+}
+```
+
+### 4.1. Enabled
+The `AirPlayProcess` interface **MUST** have an `enabled` boolean property API that represents whether AirPlay is currently enabled.
+
+There are no parameters.
+
+### 4.2. Paired
+The `AirPlayProcess` interface **MUST** have an `paired` boolean property API that represents whether AirPlay is currently paired.
+
+There are no parameters.
+
+## 5. AirPlay Experience Provider
 The AirPlay App **MUST** include the `xrn:firebolt:capability:airplay:experience` capability in it's provided capabilities via the app manifest.
 
 The AirPlay App **MUST** register a provider class for the `xrn:firebolt:capability:airplay:experience` capability as part of it's initialziation:
@@ -87,37 +102,37 @@ AirPlay.provide('xrn:firebolt:capability:airplay:experience', new CustomAirPlayE
 The `xrn:firebolt:capability:airplay:experience` capability interface is:
 
 ```typescript
+enum AirPlayState = "audio" | "curtain" | "video" | "screen" | "settings"
+
 interface AirPlayExperience {
-    player(): Promise<void>
-    settings(): Promise<void>
+    state(): Promise<AirPlayState>
+    onStateChanged(): Promise<AirPlayState>
 }
 ```
 
-### 8.1. Player
+### 5.1. State
+The `AirPlayExperience` interface **MUST** have a `state` string property API that represents the current state of the UX.
+
+The `state` **MUST** be one of the following values:
+
+- `"audio"`
+- `"curtain"`
+- `"video"`
+- `"screen"`
+- `"settings"`
+
+There are no parameters.
+
+### 5.2. Player
 The `AirPlayExperience` interface **MUST** have a `player` API for instructing the app to present the main player UX.
 
 When the `player` API is called the AirPlay App **MUST** attempt to present the main player user experience and either succeed or report an error denoting a failure.
 
 There are no parameters. The AirPlay Daemon will send more detailed info using Apple's opaque WebSocket protocol.
 
-### 8.2. Settings
+### 5.3. Settings
 The `AirPlayExperience` interface **MUST** have a `settings` API for instructing the app to present the AirPlay settings UX.
 
 When the `settings` API is called the AirPlay App **MUST** attempt to present the settings user experience and either succeed or report an error denoting a failure.
 
 There are no parameters.
-
-## 9. AirPlay Process Provider
-
-The AirPlay Daemon **MUST** register as a provider for the `xrn:firebolt:capability:airplay:process` capability.
-
-### 9.1. Enabled
-The `xrn:firebolt:capability:airplay:process` capability **MUST** support a component providing a read-only `enabled` boolean property.
-
-- enabled
-- connected
-- 
-
-| method | params | result | 
-| ------ | ------ | ------ |
-| enabled | 
