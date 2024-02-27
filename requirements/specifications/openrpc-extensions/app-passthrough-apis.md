@@ -200,7 +200,7 @@ Content.requestUserInterest (pull, use)
             "tags": [
                 {
                     "name": "capabilities",
-                    "x-provided-by": "onRequestUserInterest",
+                    "x-provided-by": "Discovery.onRequestUserInterest",
                     "x-provider-selection": "presentation",
                     "x-uses": [
                         "xrn:firebolt:capability:discovery:interest"
