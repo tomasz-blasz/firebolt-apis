@@ -143,9 +143,6 @@ Schemas
             "InterestInfo": {
                 "type": "object",
                 "properties": {
-                    "appId": {
-                        "type": "string"
-                    },
                     "entity": {
                         "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/EntityInfo"
                     },
@@ -154,7 +151,38 @@ Schemas
                     }
                 },
                 "required": [
-                    "entity"
+                    "appId",
+                    "info"
+                ]
+            },
+            "AppProvidedInterestInfo": {
+                "type": "object",
+                "properties": {
+                    "appId": {
+                        "type": "string"
+                    },
+                    "info": {
+                        "$ref": "#/components/schemas/InterestInfo"
+                    }
+                },
+                "required": [
+                    "appId",
+                    "info"
+                ]
+            },
+            "AppProvidedEntityInfo": {
+                "type": "object",
+                "properties": {
+                    "appId": {
+                        "type": "string"
+                    },
+                    "info": {
+                        "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/EntityInfo"
+                    }
+                },
+                "required": [
+                    "appId",
+                    "info"
                 ]
             }
         }
@@ -172,11 +200,8 @@ Content.requestUserInterest (pull, use)
             "tags": [
                 {
                     "name": "capabilities",
-                    "x-app-provided": true,
-                    "x-app-selection": "presentation",
-                    "x-composite-result": true,
-                    "x-app-id-property": "appId",
-                    "x-aggregate": false,
+                    "x-provided-by": "onRequestUserInterest",
+                    "x-provider-selection": "presentation",
                     "x-uses": [
                         "xrn:firebolt:capability:discovery:interest"
                     ]
@@ -192,9 +217,9 @@ Content.requestUserInterest (pull, use)
                 }
             ],
             "result": {
-                "name": "interestedIn",
+                "name": "entity",
                 "schema": {
-                    "$ref": "#/components/schemas/InterestInfo",
+                    "$ref": "#/components/schemas/AppProvidedEntityInfo",
                 }
             }
         }
@@ -302,7 +327,7 @@ Discovery.userInterest (push)
 }
 ```
 
-Content.onUserInterest (push) 
+Content.onUserInterest (push)
 
 ```json
 {
@@ -312,10 +337,8 @@ Content.onUserInterest (push)
             "tags": [
                 {
                     "name": "capabilities",
-                    "x-app-provided": true,
-                    "x-composite-result": true,
-                    "x-aggregate": false,
-                    "x-app-id-property": "appId",
+                    "x-provided-by": "Discovery.userInterest",
+                    "x-provider-selection": "broadcast",
                     "x-uses": [
                         "xrn:firebolt:capability:discovery:interest"
                     ]
@@ -327,7 +350,7 @@ Content.onUserInterest (push)
             "result": {
                 "name": "info",
                 "schema": {
-                    "$ref": "#/components/schemas/InterestedInfo",
+                    "$ref": "#/components/schemas/AppProvidedInterestInfo",
                 }
             }
         }
