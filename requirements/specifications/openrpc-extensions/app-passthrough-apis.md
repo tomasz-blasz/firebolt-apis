@@ -151,8 +151,8 @@ Schemas
                     }
                 },
                 "required": [
-                    "appId",
-                    "info"
+                    "entity",
+                    "type"
                 ]
             },
             "AppProvidedInterestInfo": {
