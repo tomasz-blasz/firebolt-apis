@@ -20,43 +20,13 @@
 // setup for Firebolt SDK/TL handshake
 const win = globalThis || window
 
-let _queue = []
-let _callback:Function
-let target
-
-const queue = {
-  
-    send: function(json) {
-        if (target) {
-            target.send(json)
-        }
-        else {
-            _queue.push(json)
-        }
-    },
-  
-    receive: function (callback) {
-      _callback = callback
-    },
-  
-    flush: function (transport:any) {
-        target = transport
-        transport.receive(_callback)
-        _queue.forEach(item => transport.send(item))
-        _queue = null
-    }
-}  
-
-// set up a queue to hold all Firebolt messages
-win.__firebolt.transport = queue
-
 import Setup from '../../../../../test/Setup'
 import { beforeAll, test, expect } from '@jest/globals';
-import {  Lifecycle, Discovery } from "../../build/javascript/src/firebolt";
+import { Lifecycle, Discovery } from "../../build/javascript/src/firebolt";
 
 // holds test transport layer state, e.g. callback
 type stateType = {
-    callback: (arg0: any) => void | null
+    callback: (arg0: string) => void | null
 }
 
 const state:stateType = {
@@ -69,8 +39,10 @@ let callbackWiredUp = false
 let sendCalled = false
 
 const transport = {
-    send: function(json) {
+    send: function(message) {
         sendCalled = true
+        const json = JSON.parse(message)
+        console.log('transport.send: ' + json.method)
         if (json.method.toLowerCase() === 'lifecycle.ready') {
             // we'll assert on this later...
             navigateToListenCount++
@@ -80,12 +52,12 @@ const transport = {
                 let response = {
                     jsonrpc: '2.0',
                     id: json.id,
-                    result: null
+                    result: true
                 }
                 // catching errors, so all tests don't fail if this breaks
                 try {
                     // send back the onInactive event immediately, to test for race conditions
-                    state.callback(response)
+                    state.callback(JSON.stringify(response))
                 }
                 catch (err) {
                     // fail silenetly (the boolean-based tests below will figure it out...)
@@ -97,6 +69,7 @@ const transport = {
         }
     },
     receive: function(callback) {
+        console.log('transport.receive')
         // store the callback
         state.callback = callback
     }
@@ -119,7 +92,7 @@ beforeAll(()=> {
 
     Lifecycle.ready()
     
-    queue.flush(transport)
+    win.__firebolt.setTransportLayer(transport)
 
     return p
 })

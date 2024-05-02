@@ -22,7 +22,7 @@
 
 function version() {
   return new Promise( (resolve, reject) => {
-    Gateway.request('Device.version').then( v => {
+      Transport.send('device', 'version').then( v => {
           v = v || {}
           v.sdk = v.sdk || {}
           v.sdk.major = parseInt('${major}')
