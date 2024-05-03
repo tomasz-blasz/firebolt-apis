@@ -67,7 +67,7 @@ test('entityInfo pull', () => {
         return Promise.resolve(result)
     })
 
-    Setup.emit('discovery', 'pullEntityInfo', {
+    Setup.emit('Discovery', 'pullEntityInfo', {
         correlationId: '123',
         parameters: {
             entityId: '123'

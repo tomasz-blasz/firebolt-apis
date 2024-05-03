@@ -31,7 +31,7 @@ export const store = {
 
 async function ready() {
   let readyRes;
-  await prioritize('Lifecycle', (event, value) => {
+  prioritize('Lifecycle', (event, value) => {
     store._current = event
   })
   readyRes = await Gateway.request('Lifecycle.ready')
