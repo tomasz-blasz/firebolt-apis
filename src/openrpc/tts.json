@@ -364,7 +364,7 @@
                     "params": [],
                     "result": {
                         "name": "Default Result",
-                        "value": "OK"
+                        "value": "ok"
                     }
                 }
             ]
@@ -376,10 +376,10 @@
                 "description": "Enumeration of TTS statuses",
                 "type": "string",
                 "enum": [
-                    "FAIL",
-                    "INVALID_CONFIGURATION",
-                    "NOT_ENABLED",
-                    "OK"
+                    "disabled",
+                    "fail",
+                    "invalidConfiguration",
+                    "ok"
                 ]
             }
         }
