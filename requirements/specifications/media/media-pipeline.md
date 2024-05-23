@@ -6,16 +6,16 @@ See [Firebolt Requirements Governance](./governance.md) for more info.
 
 **NOTE**: Update this link based on your directory depth ^^
 
-| Contributor    | Organization   |
-| -------------- | -------------- |
-| Lucien Kennedy-Lamb            | Sky            |
-| Bijal Shah            | Sky            |
-| Yuri Pasquali            | Sky            |
-| Stuart Pett            | Sky            |
-| Wouter Meek            | Comcast            |
-| Jeremy LaCivita            | Comcast            |
-| Kevin Pearson            | Comcast            |
-| Phillip Stroffolino            | Comcast            |
+| Contributor         | Organization |
+| ------------------- | ------------ |
+| Lucien Kennedy-Lamb | Sky          |
+| Bijal Shah          | Sky          |
+| Yuri Pasquali       | Sky          |
+| Stuart Pett         | Sky          |
+| Wouter Meek         | Comcast      |
+| Jeremy LaCivita     | Comcast      |
+| Kevin Pearson       | Comcast      |
+| Phillip Stroffolino | Comcast      |
 
 ## 1. Overview
 
@@ -41,7 +41,7 @@ TODO: we need a few additions to support Netflix:
 - loudness eq
 The audioSettings **MUST** include an `atmosOutputLock` boolean property.
 
-The audioSettings **MUST** include an `audioLoundnessEquivalence` boolean property.
+The audioSettings **MUST** include an `audioLoudnessEquivalence` boolean property.
 
 The audioSettings API **MUST** be a Firebolt `property:readonly` API, and
 have a corresponding `onAudioSettingsChanged` notification.
