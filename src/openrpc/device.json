@@ -939,7 +939,6 @@
             "value": [
               "720p50",
               "720p60",
-              "1080i25",
               "1080i50",
               "1080i60",
               "1080p24",
@@ -1170,6 +1169,7 @@
       "HDCPVersion": {
         "description": "The HDCP version",
         "type": "string",
+        "enumKeyPrefix": "hdcp",
         "enum": [
           "1.4",
           "2.2",

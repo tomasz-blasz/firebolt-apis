@@ -21,6 +21,7 @@
         "AudioCodecLevel": {
             "description": "Audio codec level",
             "type": "string",
+            "enumKeyPrefix": "level",
             "enum": [
                 "3.0",
                 "3.1",
@@ -67,16 +68,6 @@
                 "unknown"
             ]
         },
-        "ColorDepth": {
-            "description": "Color depth in number of bits",
-            "type": "integer",
-            "enum": [
-                0,
-                8,
-                10,
-                12
-            ]
-        },
         "Dimensions": {
             "type": "array",
             "description": "The dimensions specified as width and height.",
@@ -119,6 +110,7 @@
             "type": "string",
             "description": "video codec",
             "enum": [
+                "av1",
                 "avc",
                 "hevc",
                 "mpeg1",
@@ -141,6 +133,7 @@
         "VideoMode": {
             "description": "Video output mode; the shorthand resolution and frame rate",
             "type": "string",
+            "enumKeyPrefix": "mode",
             "enum": [
                 "480i",
                 "480p",
@@ -149,13 +142,15 @@
                 "576p60",
                 "720p50",
                 "720p60",
-                "1080i25",
                 "1080i50",
                 "1080i60",
                 "1080p24",
+                "1080p25",
                 "1080p30",
                 "1080p50",
                 "1080p60",
+                "2160p24",
+                "2160p25",
                 "2160p30",
                 "2160p50",
                 "2160p60",
