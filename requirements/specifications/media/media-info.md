@@ -71,18 +71,21 @@ I want to show an audio/videophile overlay with detailed information:
   - [3.4. Resolution User-Friendly Name](#34-resolution-user-friendly-name)
   - [3.5. Video Modes](#35-video-modes)
   - [3.6. Media HDR Profiles](#36-media-hdr-profiles)
-  - [3.7. Color Depth](#37-color-depth)
-  - [3.8 Colorimetry](#38-colorimetry)
+  - [3.7 Colorimetry](#37-colorimetry)
 - [4. Device Media Support](#4-device-media-support)
   - [4.1. Video Format Supported](#41-video-format-supported)
   - [4.2. Audio Format Supported](#42-audio-format-supported)
 - [5. Display Properties](#5-display-properties)
   - [5.1. Supported HDR Profiles](#51-supported-hdr-profiles)
-  - [5.2. Supported Color Depth](#52-supported-color-depth)
+  - [5.2. Color Depth](#52-color-depth)
   - [5.3. Display Size](#53-display-size)
   - [5.4. Display Resolution](#54-display-resolution)
   - [5.5. Display Resolution Name](#55-display-resolution-name)
   - [5.6. Refresh Rate](#56-refresh-rate)
+  - [5.7. Colorimetry](#57-colorimetry)
+  - [5.8. Manufacturer](#58-manufacturer)
+  - [5.9. Product Name](#59-product-name)
+  - [5.10. Source Physical Address](#510-source-physical-address)
 - [6. Device Properties](#6-device-properties)
   - [6.1. Current Video Mode](#61-current-video-mode)
   - [6.2. Supported Video Modes](#62-supported-video-modes)
@@ -213,16 +216,7 @@ The Firebolt `Media` module **MUST** have an `HDRProfile` enumeration:
 - `sdr`
 - `unknown`
 
-### 3.7. Color Depth
-
-The Firebolt `Media` module **MUST** have an `ColorDepth` enumeration:
-
-- `0`
-- `8`
-- `10`
-- `12`
-
-### 3.8 Colorimetry
+### 3.7 Colorimetry
 
 The Firebolt `Media` module **MUST** have an `Colorimetry` enumeration:
 
@@ -231,7 +225,7 @@ The Firebolt `Media` module **MUST** have an `Colorimetry` enumeration:
 - `BT2020YCC`
 - `DCI-P3`
 - `ICtCp`
-- `opRGB` (Adobe RGB 1998)
+- `opRGB`
 - `opYCC601`
 - `sYCC601`
 - `xvYCC601`
@@ -342,9 +336,9 @@ Display.hdrProfiles()
 //> ["dolbyVision", "hdr10", "hdr10plus", "hlg", "sdr"]
 ```
 
-### 5.2. Supported Color Depth
+### 5.2. Color Depth
 
-The `Display` module **MUST** have a `colorDepth` method that returns a `Media.ColorDepth` value.
+The `Display` module **MUST** have a `colorDepth` method that returns an integer value.
 
 If no display is present, a value of zero is returned.
 
@@ -395,6 +389,50 @@ If no display is present, a value of zero is returned.
 ```javascript
 Display.refreshRate()
 //> 120
+```
+
+### 5.7. Colorimetry
+
+The `Display` module **MUST** have a `colorimetry` method that returns the display's supported colorimetry values as an array of `Media.Colorimetry` values.
+
+If no display is present, an empty array is returned.
+
+```javascript
+Display.colorimetry()
+//> ["BT2020RGB", "BT2020YCC", "xvYCC601", "xvYCC709"]
+```
+
+### 5.8. Manufacturer
+
+The `Display` module **MUST** have a `manufacturer` method that returns the display's manufacturer.
+
+If no display is present, an empty string is returned.
+
+```javascript
+Display.manufacturer()
+//> "Samsung Electric Company"
+```
+
+### 5.9. Product Name
+
+The `Display` module **MUST** have a `productName` method that returns the display's product name / model number.
+
+If no display is present, an empty string is returned.
+
+```javascript
+Display.productName()
+//> "Q80A"
+```
+
+### 5.10. Source Physical Address
+
+The `Display` module **MUST** have a `sourcePhysicalAddress` method that returns the display's source physical address.
+
+If no display is present, an empty string is returned.
+
+```javascript
+Display.sourcePhysicalAddress()
+//> "3.0.0.0"
 ```
 
 ## 6. Device Properties
