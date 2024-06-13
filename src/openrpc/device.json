@@ -1317,6 +1317,36 @@
       ]
     },
     {
+      "name": "isActiveHdmiSource",
+      "summary": "Whether or not the device is currently the display's active HDMI source.",
+      "tags": [
+        {
+          "name": "property:readonly"
+        },
+        {
+          "name": "capabilities",
+          "x-uses": [
+            "xrn:firebolt:capability:device:info"
+          ]
+        }
+      ],
+      "params": [],
+      "result": {
+        "name": "isActiveHdmiSource",
+        "type": "boolean"
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": true
+          }
+        }
+      ]
+    },
+    {
       "name": "isSourceFrameRateUsed",
       "summary": "Check whether the HDMI output frame rate is set to follow the video source frame rate.",
       "tags": [
