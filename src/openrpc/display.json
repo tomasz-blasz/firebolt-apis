@@ -12,7 +12,7 @@
             "params": [],
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -25,7 +25,7 @@
                 "name": "colorDepth",
                 "summary": "The color depth supported by the display panel.",
                 "schema": {
-                    "type": "integer"
+                    "type": "number"
                 }
             },
             "examples": [
@@ -53,7 +53,7 @@
             "params": [],
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -93,7 +93,7 @@
             "summary": "Get all HDR profiles supported by the display.",
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -135,7 +135,7 @@
             "summary": "Get the manufacturer of the display device.",
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -168,7 +168,7 @@
             "summary": "Get the product/model name of the display device.",
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -201,7 +201,7 @@
             "summary": "Get the native refresh rate of the display device.",
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -234,7 +234,7 @@
             "summary": "Get the resolution of the display device in pixels. Returns a zero value for width and height if no display is present.",
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -281,7 +281,7 @@
             "summary": "Get a user-friendly resolution name of the display device.",
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -314,7 +314,7 @@
             "summary": "Get the width and height of the display panel (in centimeters).",
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",
@@ -350,7 +350,7 @@
             "summary": "Get the source physical address of the display device.",
             "tags": [
                 {
-                    "name": "property:immutable"
+                    "name": "property:readonly"
                 },
                 {
                     "name": "capabilities",

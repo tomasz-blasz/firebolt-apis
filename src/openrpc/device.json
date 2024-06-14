@@ -484,7 +484,7 @@
       "summary": "Get the HDCP version supported by the device",
       "tags": [
         {
-          "name": "property:readonly"
+          "name": "property:immutable"
         },
         {
           "name": "capabilities",
@@ -517,7 +517,7 @@
       "summary": "Returns an array of valid HDR profiles that the device supports",
       "tags": [
         {
-          "name": "property:readonly"
+          "name": "property:immutable"
         },
         {
           "name": "capabilities",
@@ -593,7 +593,7 @@
       "summary": "Get all HDR profiles supported by the device, regardless of any connected display.",
       "tags": [
         {
-          "name": "property:readonly"
+          "name": "property:immutable"
         },
         {
           "name": "capabilities",
@@ -763,7 +763,7 @@
     },
     {
       "name": "audioFormatSupported",
-      "summary": "Check whether content of a given audio format is supported by the device's current configuration. These values may change as different AV inputs or peripherals are activated or connected.",
+      "summary": "Check whether content of a given audio format is supported by the device's current configuration.  The result is based on the device's best possible audio output configuration. These values may change as different AV inputs or peripherals are activated or connected.",
       "tags": [
         {
           "name": "capabilities",
@@ -798,16 +798,16 @@
       },
       "examples": [
         {
-          "name": "Specify the audio codec and channels value to check",
+          "name": "Check whether EAC3 codec with Atmos is supported",
           "params": [
             {
               "name": "codec",
-              "value": "aac"
+              "value": "eac3"
             },
             {
               "name": "options",
               "value": {
-                "channels": 2
+                "atmos": true
               }
             }
           ],
@@ -879,9 +879,45 @@
       ]
     },
     {
+      "name": "audioMode",
+      "summary": "Get the current audio output mode of the device.",
+      "tags": [
+        {
+          "name": "property:readonly"
+        },
+        {
+          "name": "capabilities",
+          "x-uses": [
+            "xrn:firebolt:capability:device:info"
+          ]
+        }
+      ],
+      "params": [],
+      "result": {
+        "name": "audioMode",
+        "summary": "The current audio output mode.",
+        "schema": {
+          "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioMode"
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": "stereo"
+          }
+        }
+      ]
+    },
+    {
       "name": "videoMode",
       "summary": "Get the current video output mode of the device.",
       "tags": [
+        {
+          "name": "property:readonly"
+        },
         {
           "name": "capabilities",
           "x-uses": [
@@ -912,6 +948,9 @@
       "name": "videoModes",
       "summary": "Returns an array of all valid video output modes that the device and display together support.",
       "tags": [
+        {
+          "name": "property:readonly"
+        },
         {
           "name": "capabilities",
           "x-uses": [
@@ -1088,6 +1127,9 @@
       "summary": "Check whether the HDMI output frame rate is set to follow the video source frame rate.",
       "tags": [
         {
+          "name": "property:readonly"
+        },
+        {
           "name": "capabilities",
           "x-uses": [
             "xrn:firebolt:capability:device:info"
@@ -1112,6 +1154,105 @@
           }
         }
       ]
+    },
+    {
+      "name": "onAudioOutputChanged",
+      "summary": "Get notified when any of the audio output properties have been changed.",
+      "tags": [
+        {
+          "name": "event"
+        },
+        {
+          "name": "capabilities",
+          "x-uses": [
+            "xrn:firebolt:capability:device:info"
+          ]
+        }
+      ],
+      "params": [],
+      "result": {
+        "name": "onAudioOutputChanged",
+        "summary": "The current audio output properties.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "audioMode": {
+              "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioMode"
+            }
+          },
+          "required": [
+            "audioMode"
+          ]
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "audioMode": "stereo"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "onVideoOutputChanged",
+      "summary": "Get notified when any of the video output settings have been changed.",
+      "tags": [
+        {
+          "name": "event"
+        },
+        {
+          "name": "capabilities",
+          "x-uses": [
+            "xrn:firebolt:capability:device:info"
+          ]
+        }
+      ],
+      "params": [],
+      "result": {
+        "name": "onVideoOutputChanged",
+        "summary": "The current video output configuration.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "hdrProfile": {
+              "description": "",
+              "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
+            },
+            "sourceFrameRateUsed": {
+              "description": "Whether the HDMI output frame rate is set to follow the video source frame rate.",
+              "type": "boolean"
+            },
+            "videoMode": {
+              "description": "",
+              "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoMode"
+            }
+          },
+          "required": [
+            "hdrProfile",
+            "sourceFrameRateUsed",
+            "videoMode"
+          ]
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "hdrProfile": "hdr10",
+              "sourceFrameRateUsed": true,
+              "videoMode": "1080p60"
+            }
+          }
+        }
+      ]
     }
   ],
   "components": {
@@ -1124,27 +1265,16 @@
             "description": "Whether Dolby Atmos support is being requested",
             "type": "boolean"
           },
-          "channels": {
-            "description": "The number of audio channels being requested",
-            "type": "integer"
-          },
           "codecLevel": {
             "description": "The level of the audio codec",
             "type": "string"
           },
-          "codecprofile": {
+          "codecProfile": {
             "description": "The profile of the audio codec",
-            "type": "string",
-            "enum": [
-              "mp2lc",
-              "mp4he"
-            ]
+            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioCodecProfile"
           },
           "container": {
             "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioContainer"
-          },
-          "mode": {
-            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioOutputMode"
           },
           "sampleRate": {
             "description": "The sample rate of the audio, in kHz",

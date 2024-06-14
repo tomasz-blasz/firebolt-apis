@@ -40,10 +40,11 @@
                         "value": [
                             {
                                 "bitRate": 128,
-                                "channels": 2,
+                                "channels": "2",
                                 "codec": "aac",
                                 "codecProfile": "mp2lc",
                                 "container": "audio/mp4",
+                                "pipelineId": 1,
                                 "sampleRate": 48
                             }
                         ]
@@ -92,6 +93,7 @@
                                 "hdr": [
                                     "hdr10"
                                 ],
+                                "pipelineId": 1,
                                 "resolution": [
                                     1920,
                                     1080
@@ -120,7 +122,7 @@
             ],
             "params": [
                 {
-                    "name": "pipeline",
+                    "name": "pipelineId",
                     "required": true,
                     "schema": {
                         "$ref": "#/components/schemas/PipelineId"
@@ -139,17 +141,18 @@
                     "name": "Default Example",
                     "params": [
                         {
-                            "name": "pipeline",
-                            "value": 0
+                            "name": "pipelineId",
+                            "value": 1
                         }
                     ],
                     "result": {
                         "name": "Default Result",
                         "value": {
                             "bitRate": 128,
-                            "channels": 2,
+                            "channels": "2",
                             "codec": "aac",
                             "container": "audio/mp4",
+                            "pipelineId": 1,
                             "sampleRate": 48
                         }
                     }
@@ -190,9 +193,10 @@
                         "value": [
                             {
                                 "bitRate": 128,
-                                "channels": 2,
+                                "channels": "5.1",
                                 "codec": "aac",
                                 "container": "audio/mp4",
+                                "pipelineId": 1,
                                 "sampleRate": 48
                             }
                         ]
@@ -241,6 +245,7 @@
                                 "hdr": [
                                     "hdr10"
                                 ],
+                                "pipelineId": 1,
                                 "resolution": [
                                     1920,
                                     1080
@@ -269,7 +274,7 @@
             ],
             "params": [
                 {
-                    "name": "pipeline",
+                    "name": "pipelineId",
                     "required": true,
                     "schema": {
                         "$ref": "#/components/schemas/PipelineId"
@@ -288,8 +293,8 @@
                     "name": "Default Example",
                     "params": [
                         {
-                            "name": "pipeline",
-                            "value": 0
+                            "name": "pipelineId",
+                            "value": 1
                         }
                     ],
                     "result": {
@@ -303,6 +308,7 @@
                             "hdr": [
                                 "hdr10"
                             ],
+                            "pipelineId": 1,
                             "resolution": [
                                 1920,
                                 1080
@@ -320,12 +326,12 @@
                 "description": "Details on the audio content format.",
                 "properties": {
                     "bitRate": {
-                        "description": "The audio bit rate in kbps.",
+                        "description": "The audio bitrate in kbps.",
                         "type": "number"
                     },
                     "channels": {
-                        "description": "The number of audio channels.",
-                        "type": "integer"
+                        "description": "The audio output channels.",
+                        "type": "string"
                     },
                     "codec": {
                         "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioCodec"
@@ -339,6 +345,9 @@
                     "container": {
                         "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioContainer"
                     },
+                    "pipelineId": {
+                        "$ref": "#/components/schemas/PipelineId"
+                    },
                     "sampleRate": {
                         "description": "The audio sample rate in kHz.",
                         "type": "number"
@@ -347,6 +356,7 @@
                 "required": [
                     "codec",
                     "channels",
+                    "pipelineId",
                     "sampleRate"
                 ]
             },
@@ -396,6 +406,9 @@
                             "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
                         }
                     },
+                    "pipelineId": {
+                        "$ref": "#/components/schemas/PipelineId"
+                    },
                     "resolution": {
                         "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/Dimensions"
                     }
@@ -403,6 +416,7 @@
                 "required": [
                     "codec",
                     "hdr",
+                    "pipelineId",
                     "resolution"
                 ]
             }

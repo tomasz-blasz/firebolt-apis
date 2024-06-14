@@ -55,7 +55,7 @@
                 "audio/webm"
             ]
         },
-        "AudioOutputMode": {
+        "AudioMode": {
             "description": "Audio output mode",
             "type": "string",
             "enum": [
