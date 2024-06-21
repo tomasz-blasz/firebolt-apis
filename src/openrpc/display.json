@@ -1,7 +1,7 @@
 {
     "openrpc": "1.2.4",
     "info": {
-        "title": "Display Properties",
+        "title": "Display",
         "description": "A module for querying various aspects of the current (or built-in) display on a device",
         "version": "0.0.0"
     },
