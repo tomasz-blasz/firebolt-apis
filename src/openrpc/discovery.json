@@ -52,6 +52,9 @@
         {
           "name": "capabilities",
           "x-provides": "xrn:firebolt:capability:discovery:entity-info"
+        },
+        {
+          "name": "deprecated"
         }
       ],
       "summary": "Provide information about a program entity and its available watchable assets, such as entitlement status and price, via either a push or pull call flow.",
@@ -409,7 +412,7 @@
             }
           ],
           "result": {
-            "name": "success",
+            "name": "result",
             "value": true
           }
         }
@@ -424,6 +427,9 @@
         {
           "name": "capabilities",
           "x-provides": "xrn:firebolt:capability:discovery:purchased-content"
+        },
+        {
+          "name": "deprecated"
         }
       ],
       "summary": "Provide a list of purchased content for the authenticated account, such as rentals and electronic sell through purchases.",

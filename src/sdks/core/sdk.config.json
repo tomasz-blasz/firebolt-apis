@@ -69,13 +69,20 @@
             ],
             "provide": [
                 "xrn:firebolt:capability:discovery:entity-info",
-                "xrn:firebolt:capability:discovery:purchased-content"
+                "xrn:firebolt:capability:discovery:purchased-content",
+                "xrn:firebolt:capability:discovery:interest"
+            ]
+        },
+        {
+            "module": "Display",
+            "use": [
+                "xrn:firebolt:capability:display:info"
             ]
         },
         {
             "module": "Internal",
             "use": [
-                "xrn:firebolt:capability:lifecycle:initialize"        
+                "xrn:firebolt:capability:lifecycle:initialize"
             ]
         },
         {
@@ -108,6 +115,13 @@
             "use": [
                 "xrn:firebolt:capability:metrics:general",
                 "xrn:firebolt:capability:metrics:media"
+            ]
+        },
+        {
+            "module": "MediaInfo",
+            "use": [
+                "xrn:firebolt:capability:media-info:audio-format",
+                "xrn:firebolt:capability:media-info:video-format"
             ]
         },
         {
