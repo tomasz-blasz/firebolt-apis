@@ -12,9 +12,6 @@
             "params": [],
             "tags": [
                 {
-                    "name": "property:readonly"
-                },
-                {
                     "name": "capabilities",
                     "x-uses": [
                         "xrn:firebolt:capability:display:info"
@@ -53,9 +50,6 @@
             "params": [],
             "tags": [
                 {
-                    "name": "property:readonly"
-                },
-                {
                     "name": "capabilities",
                     "x-uses": [
                         "xrn:firebolt:capability:display:info"
@@ -68,7 +62,7 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/Colorimetry"
+                        "$ref": "#/components/schemas/Colorimetry"
                     }
                 }
             },
@@ -80,21 +74,46 @@
                         "name": "Default Result",
                         "value": [
                             "BT2020RGB",
-                            "BT2020YCC",
-                            "xvYCC601",
-                            "xvYCC709"
+                            "BT2020YCC"
                         ]
                     }
                 }
             ]
         },
         {
-            "name": "hdrProfiles",
-            "summary": "Get all HDR profiles supported by the display.",
+            "name": "eotf",
+            "summary": "Get the display's Electro Optical Transfer Function (EOTF).",
+            "params": [],
             "tags": [
                 {
-                    "name": "property:readonly"
-                },
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:display:info"
+                    ]
+                }
+            ],
+            "result": {
+                "name": "eotf",
+                "summary": "The EOTF value supported by the display panel.",
+                "schema": {
+                    "$ref": "#/components/schemas/TransferFunction"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "SMPTE_ST2084"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "hdrProfiles",
+            "summary": "Get the display's supported HDR profiles.",
+            "tags": [
                 {
                     "name": "capabilities",
                     "x-uses": [
@@ -105,7 +124,7 @@
             "params": [],
             "result": {
                 "name": "hdrProfiles",
-                "summary": "An array of all valid HDR profiles that the display supports.",
+                "summary": "An array of all HDR profiles supported by the display.",
                 "schema": {
                     "type": "array",
                     "items": {
@@ -135,9 +154,6 @@
             "summary": "Get the manufacturer of the display device.",
             "tags": [
                 {
-                    "name": "property:readonly"
-                },
-                {
                     "name": "capabilities",
                     "x-uses": [
                         "xrn:firebolt:capability:display:info"
@@ -164,12 +180,9 @@
             ]
         },
         {
-            "name": "productName",
-            "summary": "Get the product/model name of the display device.",
+            "name": "model",
+            "summary": "Get the model/product name of the display device.",
             "tags": [
-                {
-                    "name": "property:readonly"
-                },
                 {
                     "name": "capabilities",
                     "x-uses": [
@@ -179,8 +192,8 @@
             ],
             "params": [],
             "result": {
-                "name": "productName",
-                "summary": "The product/model name of the display device.",
+                "name": "model",
+                "summary": "The model/product name of the display device.",
                 "schema": {
                     "type": "string"
                 }
@@ -200,9 +213,6 @@
             "name": "refreshRate",
             "summary": "Get the native refresh rate of the display device.",
             "tags": [
-                {
-                    "name": "property:readonly"
-                },
                 {
                     "name": "capabilities",
                     "x-uses": [
@@ -234,9 +244,6 @@
             "summary": "Get the resolution of the display device in pixels. Returns a zero value for width and height if no display is present.",
             "tags": [
                 {
-                    "name": "property:readonly"
-                },
-                {
                     "name": "capabilities",
                     "x-uses": [
                         "xrn:firebolt:capability:display:info"
@@ -248,7 +255,7 @@
                 "name": "resolution",
                 "summary": "The resolution of the display device.",
                 "schema": {
-                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/Dimensions"
+                    "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Dimensions"
                 }
             },
             "examples": [
@@ -257,10 +264,10 @@
                     "params": [],
                     "result": {
                         "name": "Default Result",
-                        "value": [
-                            1920,
-                            1080
-                        ]
+                        "value": {
+                            "width": 1920,
+                            "height": 1080
+                        }
                     }
                 },
                 {
@@ -268,10 +275,10 @@
                     "params": [],
                     "result": {
                         "name": "Default Result",
-                        "value": [
-                            0,
-                            0
-                        ]
+                        "value": {
+                            "width": 0,
+                            "height": 0
+                        }
                     }
                 }
             ]
@@ -280,9 +287,6 @@
             "name": "resolutionName",
             "summary": "Get a user-friendly resolution name of the display device.",
             "tags": [
-                {
-                    "name": "property:readonly"
-                },
                 {
                     "name": "capabilities",
                     "x-uses": [
@@ -314,9 +318,6 @@
             "summary": "Get the width and height of the display panel (in centimeters).",
             "tags": [
                 {
-                    "name": "property:readonly"
-                },
-                {
                     "name": "capabilities",
                     "x-uses": [
                         "xrn:firebolt:capability:display:info"
@@ -328,7 +329,7 @@
                 "name": "size",
                 "summary": "The width and height of the display.",
                 "schema": {
-                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/Dimensions"
+                    "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Dimensions"
                 }
             },
             "examples": [
@@ -337,10 +338,10 @@
                     "params": [],
                     "result": {
                         "name": "Default Result",
-                        "value": [
-                            157,
-                            91
-                        ]
+                        "value": {
+                            "width": 157,
+                            "height": 91
+                        }
                     }
                 }
             ]
@@ -349,9 +350,6 @@
             "name": "sourcePhysicalAddress",
             "summary": "Get the source physical address of the display device.",
             "tags": [
-                {
-                    "name": "property:readonly"
-                },
                 {
                     "name": "capabilities",
                     "x-uses": [
@@ -381,23 +379,33 @@
     ],
     "components": {
         "schemas": {
-            "EDIDProperties": {
-                "description": "Properties of the display",
-                "type": "object",
-                "properties": {
-                    "productName": {
-                        "description": "Product name of the display device",
-                        "type": "string"
-                    },
-                    "manufacturerName": {
-                        "description": "Manufacturer of the display device",
-                        "type": "string"
-                    },
-                    "sourcePhysicalAddress": {
-                        "description": "Source physical address of the display device",
-                        "type": "string"
-                    }
-                }
+            "Colorimetry": {
+                "description": "Colorimetry",
+                "type": "string",
+                "enum": [
+                    "BT2020cYCC",
+                    "BT2020RGB",
+                    "BT2020YCC",
+                    "DCI-P3",
+                    "ICtCp",
+                    "opRGB",
+                    "opYCC601",
+                    "sYCC601",
+                    "xvYCC601",
+                    "xvYCC709",
+                    "unknown"
+                ]
+            },
+            "TransferFunction": {
+                "description": "Electro-optical transfer function of the display",
+                "type": "string",
+                "enum": [
+                    "BT1886",
+                    "BT2100",
+                    "SMPTE_ST2084",
+                    "other",
+                    "unknown"
+                ]
             }
         }
     }

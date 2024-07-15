@@ -2,9 +2,9 @@
     "$id": "https://meta.comcast.com/firebolt/schemas/media",
     "title": "Media",
     "definitions": {
-        "AudioCodec": {
+        "AudioFormat": {
             "type": "string",
-            "description": "Audio codec",
+            "description": "Audio format",
             "enum": [
                 "aac",
                 "ac3",
@@ -13,6 +13,7 @@
                 "eac3",
                 "mpeg3",
                 "opus",
+                "pcm",
                 "truehd",
                 "unknown",
                 "vorbis"
@@ -52,6 +53,7 @@
                 "audio/mpeg",
                 "audio/mp4",
                 "audio/ogg",
+                "audio/wave",
                 "audio/webm"
             ]
         },
@@ -61,44 +63,44 @@
             "enum": [
                 "auto",
                 "mono",
-                "none",
                 "passthrough",
                 "stereo",
                 "surround",
                 "unknown"
             ]
         },
-        "Colorimetry": {
-            "description": "Colorimetry",
+        "ColorDepth": {
             "type": "string",
+            "description": "Color depth",
+            "enumKeyPrefix": "colorDepth",
             "enum": [
-                "BT2020cYCC",
-                "BT2020RGB",
-                "BT2020YCC",
-                "DCI-P3",
-                "ICtCp",
-                "opRGB",
-                "opYCC601",
-                "sYCC601",
-                "xvYCC601",
-                "xvYCC709",
+                "8",
+                "10",
+                "12",
+                "auto",
                 "unknown"
             ]
         },
-        "Dimensions": {
-            "type": "array",
-            "description": "The dimensions specified as width and height.",
-            "items": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "number"
-                }
-            ],
-            "additionalItems": false,
-            "minItems": 2,
-            "maxItems": 2
+        "ColorSpace": {
+            "type": "string",
+            "description": "Color space",
+            "enum": [
+                "RGB444",
+                "YCbCr420",
+                "YCbCr422",
+                "YCbCr444",
+                "other",
+                "unknown"
+            ]
+        },
+        "HDCPVersion": {
+            "type": "string",
+            "description": "HDCP version",
+            "enum": [
+                "1.4",
+                "2.2",
+                "unknown"
+            ]
         },
         "HDRProfile": {
             "type": "string",
@@ -109,6 +111,7 @@
                 "hdr10plus",
                 "hlg",
                 "sdr",
+                "technicolor",
                 "unknown"
             ]
         },
@@ -123,9 +126,19 @@
                 "unknown"
             ]
         },
-        "VideoCodec": {
+        "VideoContainer": {
+            "description": "Video container format",
             "type": "string",
-            "description": "video codec",
+            "enum": [
+                "video/mpeg",
+                "video/mp2t",
+                "video/mp4",
+                "video/webm"
+            ]
+        },
+        "VideoFormat": {
+            "type": "string",
+            "description": "video format",
             "enum": [
                 "av1",
                 "avc",
@@ -135,16 +148,6 @@
                 "vp8",
                 "vp9",
                 "vp10"
-            ]
-        },
-        "VideoContainer": {
-            "description": "Video container format",
-            "type": "string",
-            "enum": [
-                "video/mpeg",
-                "video/mp2t",
-                "video/mp4",
-                "video/webm"
             ]
         },
         "VideoMode": {

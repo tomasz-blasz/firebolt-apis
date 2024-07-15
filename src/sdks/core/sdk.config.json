@@ -36,6 +36,12 @@
             ]
         },
         {
+            "module": "AVSystem",
+            "use": [
+                "xrn:firebolt:capability:avsystem:info"
+            ]
+        },
+        {
             "module": "Capabilities",
             "use": [
                 "xrn:firebolt:capability:capabilities:info",

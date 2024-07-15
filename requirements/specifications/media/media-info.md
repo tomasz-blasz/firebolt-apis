@@ -14,7 +14,7 @@ See [Firebolt Requirements Governance](../../governance.md) for more info.
 
 ## 1. Overview
 
-App developers need to know which audio and video formats can be successfully played on a Firebolt device and its attached display.
+App developers need to know which audio and video formats can be successfully played on a Firebolt device and its attached peripherals.
 
 An audio format includes values such as the audio container, codec, codec level, and bit rate of the audio stream.
 
@@ -28,7 +28,9 @@ A first-party app may need to check all [Media Pipelines](./media-pipeline.md) f
 
 Additionally, apps may need to know what is supported by the device, *before* initiating any media playback.
 
-To solve this, Firebolt APIs will be created to detect the formats and codecs currently being decoded by the [Media Pipeline](./media-pipeline.md).  Firebolt APIs will also be created to query whether the device supports playing content of various formats.
+To solve this, Firebolt APIs will be created to detect the formats and codecs currently being decoded by the [Media Pipeline](./media-pipeline.md).  Firebolt APIs will also be created to query whether the device and its peripherals support playing content of various formats.
+
+> TODO: Fix the above links
 
 ### 1.1. User Stories
 
@@ -64,40 +66,49 @@ I want to show an audio/videophile overlay with detailed information:
     - [1.1.1. As an OTT App developer](#111-as-an-ott-app-developer)
     - [1.1.2. As a first-party App developer](#112-as-a-first-party-app-developer)
 - [2. Table of Contents](#2-table-of-contents)
-- [3. Media Constants and Schemas](#3-media-constants-and-schemas)
+- [3. Constants, Types, and Schemas](#3-constants-types-and-schemas)
   - [3.1. Media Container Types](#31-media-container-types)
-  - [3.2. Media Codecs](#32-media-codecs)
-  - [3.3. Resolutions](#33-resolutions)
+  - [3.2. Media Formats](#32-media-formats)
+  - [3.3. Dimensions](#33-dimensions)
   - [3.4. Resolution User-Friendly Name](#34-resolution-user-friendly-name)
   - [3.5. Video Modes](#35-video-modes)
-  - [3.6. Media HDR Profiles](#36-media-hdr-profiles)
-  - [3.7. Colorimetry](#37-colorimetry)
-  - [3.8. Audio Output Mode](#38-audio-output-mode)
-- [4. Device Media Support](#4-device-media-support)
+  - [3.6. HDR Profiles](#36-hdr-profiles)
+  - [3.7. HDCP Versions](#37-hdcp-versions)
+  - [3.8. Colorimetry](#38-colorimetry)
+  - [3.9. Color Depth](#39-color-depth)
+  - [3.9. Color Space \& Chroma Subsampling](#39-color-space--chroma-subsampling)
+  - [3.10. Audio Output Mode](#310-audio-output-mode)
+  - [3.11. Transfer Function](#311-transfer-function)
+  - [3.12. Quantization Range](#312-quantization-range)
+- [4. AV System Support](#4-av-system-support)
   - [4.1. Video Format Supported](#41-video-format-supported)
   - [4.2. Audio Format Supported](#42-audio-format-supported)
-- [5. Display Properties](#5-display-properties)
-  - [5.1. Supported HDR Profiles](#51-supported-hdr-profiles)
+- [5. Display Support](#5-display-support)
+  - [5.1. HDR Profiles](#51-hdr-profiles)
   - [5.2. Color Depth](#52-color-depth)
   - [5.3. Display Size](#53-display-size)
-  - [5.4. Display Resolution](#54-display-resolution)
-  - [5.5. Display Resolution Name](#55-display-resolution-name)
+  - [5.4. Native Resolution](#54-native-resolution)
+  - [5.5. Native Resolution Name](#55-native-resolution-name)
   - [5.6. Refresh Rate](#56-refresh-rate)
   - [5.7. Colorimetry](#57-colorimetry)
   - [5.8. Manufacturer](#58-manufacturer)
-  - [5.9. Product Name](#59-product-name)
+  - [5.9. Model](#59-model)
   - [5.10. Source Physical Address](#510-source-physical-address)
-- [6. Device Properties](#6-device-properties)
-  - [6.1. Current Audio Mode](#61-current-audio-mode)
-  - [6.2. Current Video Mode](#62-current-video-mode)
-  - [6.3. Supported Video Modes](#63-supported-video-modes)
-  - [6.4. Video Resolution](#64-video-resolution)
-  - [6.5. Current HDR Profile](#65-current-hdr-profile)
-  - [6.6. Supported HDR Profiles](#66-supported-hdr-profiles)
-  - [6.7. Supported HDCP Version](#67-supported-hdcp-version)
-  - [6.8. Source Frame Rate Used](#68-source-frame-rate-used)
-  - [6.9. On Audio Output Changed](#69-on-audio-output-changed)
-  - [6.10. On Video Output Changed](#610-on-video-output-changed)
+  - [5.11. Electro Optical Transfer Function (EOTF)](#511-electro-optical-transfer-function-eotf)
+- [6. Device Support](#6-device-support)
+  - [6.1. Audio Mode](#61-audio-mode)
+  - [6.2. Video Mode](#62-video-mode)
+  - [6.3. Pre-Video Mode Change Event](#63-pre-video-mode-change-event)
+  - [6.4. Supported Audio Modes](#64-supported-audio-modes)
+  - [6.5. Supported Video Modes](#65-supported-video-modes)
+  - [6.6. Video Resolution](#66-video-resolution)
+  - [6.7. HDR Profile](#67-hdr-profile)
+  - [6.8. Supported HDR Profiles](#68-supported-hdr-profiles)
+  - [6.9. Maximum Supported HDCP Version](#69-maximum-supported-hdcp-version)
+  - [6.11. Color Depth](#611-color-depth)
+  - [6.11. Maximum Supported Color Depth](#611-maximum-supported-color-depth)
+  - [6.12. Color Space \& Chroma Subsampling](#612-color-space--chroma-subsampling)
+  - [6.13. Quantization Range](#613-quantization-range)
 - [7. Media Info](#7-media-info)
   - [7.1. MediaInfo for Current App](#71-mediainfo-for-current-app)
     - [7.1.1. Video Format](#711-video-format)
@@ -106,7 +117,7 @@ I want to show an audio/videophile overlay with detailed information:
     - [7.2.1. Active Video Formats](#721-active-video-formats)
     - [7.2.2. Active Audio Formats](#722-active-audio-formats)
 
-## 3. Media Constants and Schemas
+## 3. Constants, Types, and Schemas
 
 ### 3.1. Media Container Types
 
@@ -117,6 +128,7 @@ The Firebolt `Media` module **MUST** have an `AudioContainer` enumeration of the
 | `audio/mp4`  | [MP4 Audio](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#mpeg-4_mp4)                                  |
 | `audio/mpeg` | [Moving Picture Experts Group (MPEG1/MPEG2)](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#mpegmpeg-2) |
 | `audio/ogg`  | [OGG](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#ogg)                                               |
+| `audio/wave` | [Waveform Audio File Format](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#wave_wav)                   |
 | `audio/webm` | [Web Media](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#webm)                                        |
 
 The Firebolt `Media` module **MUST** have a `VideoContainer` enumeration of the following media container content types:
@@ -128,9 +140,9 @@ The Firebolt `Media` module **MUST** have a `VideoContainer` enumeration of the 
 | `video/mpeg` | [Moving Picture Experts Group (MPEG1/MPEG2)](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#mpegmpeg-2) |
 | `video/webm` | [Web Media](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#webm)                                        |
 
-### 3.2. Media Codecs
+### 3.2. Media Formats
 
-The Firebolt `Media` module **MUST** have an `AudioCodec` enumeration:
+The Firebolt `Media` module **MUST** have an `AudioFormat` enumeration:
 
 | Name     | Description                                    |
 | -------- | ---------------------------------------------- |
@@ -141,10 +153,11 @@ The Firebolt `Media` module **MUST** have an `AudioCodec` enumeration:
 | `eac3`   | Dolby Digital Plus / Dolby Enhanced AC-3 / DD+ |
 | `mpeg3`  | MPEG-1 Part 3 & MPEG-2 Part 3                  |
 | `opus`   | IETF Opus                                      |
+| `pcm`    | Pulse Code Modulation/WAVE                     |
 | `truehd` | Dolby TrueHD / MLP                             |
 | `vorbis` | Xiph.org Vorbis                                |
 
-The Firebolt `Media` module **MUST** have a `VideoCodec` enumeration:
+The Firebolt `Media` module **MUST** have a `VideoFormat` enumeration:
 
 | Name    | Description                          |
 | ------- | ------------------------------------ |
@@ -157,13 +170,14 @@ The Firebolt `Media` module **MUST** have a `VideoCodec` enumeration:
 | `vp9`   | Video Processor 9                    |
 | `vp10`  | Video Processor 10                   |
 
-### 3.3. Resolutions
+### 3.3. Dimensions
 
-For the purposes of the Firebolt API, a `Resolution` shall be defined by two values: the width and height, in pixels.
+The Firebolt `Types` module must have a `Dimensions` object of the following schema:
 
-For example, the resolution for a display may be defined as `[1920, 1080]`.
-
-Any methods relating to a resolution (such as the supported resolution of a display or the output resolution of a device) **MUST** return two values: the width and height.
+| Field    | Type     |
+| -------- | -------- |
+| `height` | `number` |
+| `width`  | `number` |
 
 ### 3.4. Resolution User-Friendly Name
 
@@ -207,7 +221,7 @@ The Firebolt `Media` module **MUST** have a `VideoMode` enumeration:
 
 Any methods relating to the video mode (such as a device's video output mode) **MUST** return `Media.VideoMode` values.
 
-### 3.6. Media HDR Profiles
+### 3.6. HDR Profiles
 
 The Firebolt `Media` module **MUST** have an `HDRProfile` enumeration:
 
@@ -216,11 +230,20 @@ The Firebolt `Media` module **MUST** have an `HDRProfile` enumeration:
 - `hdr10plus`
 - `hlg`
 - `sdr`
+- `technicolor`
 - `unknown`
 
-### 3.7. Colorimetry
+### 3.7. HDCP Versions
 
-The Firebolt `Media` module **MUST** have an `Colorimetry` enumeration:
+The Firebolt `Media` module **MUST** have an `HDCPVersion` enumeration:
+
+- `1.4`
+- `2.2`
+- `unknown`
+
+### 3.8. Colorimetry
+
+The Firebolt `Display` module **MUST** have a `Colorimetry` enumeration:
 
 - `BT2020cYCC`
 - `BT2020RGB`
@@ -234,160 +257,203 @@ The Firebolt `Media` module **MUST** have an `Colorimetry` enumeration:
 - `xvYCC709`
 - `unknown`
 
-### 3.8. Audio Output Mode
+### 3.9. Color Depth
+
+The Firebolt `Media` module **MUST** have a `ColorDepth` enumeration:
+
+- `8`
+- `10`
+- `12`
+- `auto`
+- `unknown`
+
+### 3.9. Color Space & Chroma Subsampling
+
+The Firebolt `Media` module **MUST** have a `ColorSpace` enumeration:
+
+| Name       | Chroma |
+| ---------- | ------ |
+| `RGB444`   | 4:4:4  |
+| `YCbCr420` | 4:2:0  |
+| `YCbCr422` | 4:2:2  |
+| `YCbCr444` | 4:4:4  |
+| `other`    |        |
+| `unknown`  |        |
+
+### 3.10. Audio Output Mode
 
 The Firebolt `Media` module **MUST** have an `AudioMode` enumeration:
 
 - `auto`
 - `mono`
-- `none`
 - `passthrough`
 - `stereo`
 - `surround`
 - `unknown`
 
-## 4. Device Media Support
+### 3.11. Transfer Function
 
-Apps need to know what types of media support the device is capable of.
+The Firebolt `Display` module **MUST** have a `TransferFunction` enumeration:
 
-To facilitate this, the `Device` module will have a set of methods that return possible media capabilities supported by the current device configuration.
+| Name           | Description                              |
+| -------------- | ---------------------------------------- |
+| `BT1886`       | ITU-R BT.1886                            |
+| `BT2100`       | ITU-R BT.2100                            |
+| `SMPTE_ST2084` | SMPTE ST.2084; Perceptual quantizer (PQ) |
+| `other`        | other                                    |
+| `unknown`      | unknown                                  |
 
-These values do not change without a settings change or a firmware update.
+### 3.12. Quantization Range
+
+The Firebolt `Device` module **MUST** have a `QuantizationRange` enumeration:
+
+- `full`
+- `limited`
+- `unknown`
+
+## 4. AV System Support
+
+Apps need to know what types of media support the device and any connected peripherals are together capable of.
+
+To facilitate this, the `AVSystem` module will provide convenience methods that encapsulate the capabilities of the device as well as any of its connected peripherals, including but not limited to, displays, sound bars, and receivers.
+
+These values **MUST NOT** change without a settings change, peripheral change, or firmware update.
 
 ### 4.1. Video Format Supported
 
-The `Device` module **MUST** have a `videoFormatSupported` API that returns `true` or `false` depending on whether the format specified is supported by the current device and its AV chain. This API **MUST** return `boolean`.
+The `AVSystem` module **MUST** have a `videoFormatSupported` method that returns boolean that provides whether or not the specified format is supported by the current device and its AV chain.
+
+This method **MUST** have a required `format` parameter with the type `Media.VideoFormat`.
+
+This method **MUST** have an optional `info` parameter which **MUST** be an object with zero or more of the following properties:
+
+| Property     | Type                   | Description                                                                                                  |
+| ------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `container`  | `Media.VideoContainer` | The content container format                                                                                 |
+| `hdr`        | `Media.HDRProfile`     | The HDR profile to check                                                                                     |
+| `level`      | `string`               | The codec level:<br>**hevc**: `4.1`, `4.2`, `5.0`, `5.1`<br>**vp9**:`3.0`, `3.1`, `4.0`, `4.1`, `5.0`, `5.1` |
+| `profile`    | `string`               | The codec profile:<br>**hevc**: `main`, `high`, `main10`<br>**vp9**: `p0`, `p2`                              |
+| `resolution` | `Types.Dimensions`     | The dimensions of the media content, in pixels                                                               |
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
-const hdr10plusWithH265 = Device.videoFormatSupported(Media.VideoCodec.HEVC, {
+AVSystem.videoFormatSupported(Media.VideoFormat.HEVC, {
   profile: "main10",
   hdr: Media.HDRProfile.HDR10_PLUS
 })
 //> true
 
-const hdr10plusWithVP9 = Device.videoFormatSupported(Media.VideoCodec.VP9, {
+AVSystem.videoFormatSupported(Media.VideoFormat.VP9, {
   profile: "p2",
   hdr: Media.HDRProfile.HDR10_PLUS,
-  resolution: [3840, 2160]
+  resolution: { "width": 3840, "height": 2160 }
 })
 //> true
 ```
 
-The `videoFormatSupported` API **MUST** have a required `codec` parameter with the type `Media.VideoCodec`.
-
-The `videoFormatSupported` API **MUST** have an optional `info` parameter which **MUST** be an object with zero or more of the following properties:
-
-| Property     | Type                   | Description                                                                                                   |
-| ------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `container`  | `Media.VideoContainer` | The content container format                                                                                  |
-| `hdr`        | `Media.HDRProfile`     | The HDR profile that support is being checked for                                                             |
-| `level`      | `string`               | The codec level: <br>**hevc**: `4.1`, `4.2`, `5.0`, `5.1`<br>**vp9**:`3.0`, `3.1`, `4.0`, `4.1`, `5.0`, `5.1` |
-| `profile`    | `string`               | The codec profile: <br>**hevc**: `main`, `high`, `main10`<br>**vp9**: `p0`, `p2`                              |
-| `resolution` | `array`                | The resolution in width and height (e.g. `[1920, 1080]`) of the media content being requested                 |
-
-> **NOTE**: A device supporting a particular HDR profile and resolution does not mean that the current display also supports that profile and resolution. See `Display.hdrProfiles()` for more info on detecting display HDR support.
-
-The `videoFormatSupported` API **MUST NOT** return `true` unless the format specified is supported with **all** of the properties specified in `options` *at the same time*.
-
-Use of the `videoFormatSupported` API requires access to the `use` role of the `xrn:firebolt:capability:device:info` capability.
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:avsystem:info` capability.
 
 ### 4.2. Audio Format Supported
 
-The `Device` module **MUST** have an `audioFormatSupported` API that returns `true` or `false` depending on whether the format specified is supported by the current device configuration and its AV chain. This API **MUST** return a `boolean`.
+The `AVSystem` module **MUST** have an `audioFormatSupported` method that returns a boolean that provides whether or not the specified format is supported by the current device configuration and its AV chain.
+
+This method **MUST** have a required `format` parameter with the type `Media.AudioFormat`.
+
+This method **MUST** have an optional `options` parameter which **MUST** be an object with zero or more of the following properties:
+
+| Property       | Type              | Description                                                                |
+| -------------- | ----------------- | -------------------------------------------------------------------------- |
+| `atmos`        | `boolean`         | Whether or not Dolby Atmos support for the given format is being requested |
+| `codecLevel`   | `string`          | The codec level                                                            |
+| `codecProfile` | `string`          | The codec profile:<br>**aac**: `mp2lc`, `mp4he`                            |
+| `container`    | `Media.Container` | The container format type                                                  |
+| `sampleRate`   | `number`          | The sample rate being requested, in kHz                                    |
+
+If the `options` parameter is provided, then this method **MUST NOT** return `true` unless the format specified is supported with **all** of the properties specified by `options` *all at the same time*.
+
+As multiple audio output modes may be set at the same time, the response **MUST** be based on the best possible audio configuration supported by the device and its AV chain.  For instance, if the device is configured for stereo output (which cannot support Atmos) but the AV chain supports Surround 5.1 (which can support Atmos), the latter would be considered the best possible audio configuration and thus used as the basis for the decision.
 
 ```javascript
-const atmosWithAC4 = Device.audioFormatSupported(Media.AudioCodec.AC4, {
+AVSystem.audioFormatSupported(Media.AudioFormat.AC4, {
   atmos: true
 })
 //> true
 
-const atmosWithTrueHD = Device.audioFormatSupported(Media.AudioCodec.TRUEHD, {
-  atmos: true
-})
-//> true
-
-const noAtmosOverMono = Device.audioFormatSupported(Media.AudioCodec.TRUEHD, {
+AVSystem.audioFormatSupported(Media.AudioFormat.TRUEHD, {
   atmos: true
   mode: 'mono'
 })
 //> false (mono output not supported with dolby atmos)
 ```
 
-The `audioFormatSupported` API **MUST** have a required `codec` parameter with the type `Media.AudioCodec`.
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:avsystem:info` capability.
 
-The `audioFormatSupported` API **MUST** have an optional `options` parameter which **MUST** be an object with zero or more of the following properties:
+## 5. Display Support
 
-| Property       | Type              | Description                                                                |
-| -------------- | ----------------- | -------------------------------------------------------------------------- |
-| `atmos`        | `boolean`         | Whether or not Dolby Atmos support for the given format is being requested |
-| `codecLevel`   | `string`          | The codec level                                                            |
-| `codecProfile` | `string`          | The codec profile: <br>**aac**: `mp2lc`, `mp4he`                           |
-| `container`    | `Media.Container` | The container format type                                                  |
-| `sampleRate`   | `number`          | The sample rate being requested, in kHz                                    |
+Apps need to know various aspects of the current (or built-in) display of a device.
 
-If the `options` parameter is provided, then the `audioFormatSupported` API **MUST NOT** return `true` unless the format specified is supported with **all** of the properties specified by `options` *all at the same time*.
+These will be surfaced in the `Display` module.
 
-As multiple audio output modes may be set at the same time, the response **MUST** be based on the best possible audio configuration supported by the device.  For instance, if the device is configured for stereo output (which cannot support Atmos) but the AV chain supports Surround 5.1 (which can support Atmos), the latter would be considered the best possible audio configuration and thus used as the basis for the decision.
+### 5.1. HDR Profiles
 
-Use of the `audioFormatSupported` API requires access to the `use` role of the `xrn:firebolt:capability:device:info` capability.
+The `Display` module **MUST** have an `hdrProfiles` method that returns an array of `Media.HDRProfile` values denoting the display's supported HDR profiles.
 
-## 5. Display Properties
+If no display is present, an empty array **MUST** be returned.
 
-Apps need to know various aspects of the current (or built-in) display on a device.
-
-These will be surfaced in a new `Display` module.
-
-Access to these APIs is governed by the `xrn:firebolt:capability:display:info` capability.
-
-### 5.1. Supported HDR Profiles
-
-The `Display` module **MUST** have an `hdrProfiles` method that returns the display's supported HDR profiles as an array of `Media.HDRProfile` values.
-
-If no display is present, an empty array is returned.
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.hdrProfiles()
-//> ["dolbyVision", "hdr10", "hdr10plus", "hlg", "sdr"]
+//> ["dolbyVision", "hdr10", "hdr10plus", "hlg"]
 ```
 
 ### 5.2. Color Depth
 
-The `Display` module **MUST** have a `colorDepth` method that returns a numerical value.
+The `Display` module **MUST** have a `colorDepth` method that returns a `Media.ColorDepth` value denoting the display's supported color depth.
 
-If no display is present, a value of zero is returned.
+If no display is present, a value of `unknown` **MUST** be returned.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.colorDepth()
-//> 10
+//> "10"
 ```
 
 ### 5.3. Display Size
 
-The `Display` module **MUST** have a `size` method that returns the width and height of the display, in centimeters.
+The `Display` module **MUST** have a `size` method that returns a `Types.Dimensions` object denoting the physical width and height of the display, in centimeters.
 
-If no display is present, a value of zero is returned for both the width and height.
+If no display is present, the height and width values **MUST** both be zero.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.size()
-//> [157, 91]
+//> { "width": 157, "height": 91 }
 ```
 
-### 5.4. Display Resolution
+### 5.4. Native Resolution
 
-The `Display` module **MUST** have a `resolution` method that returns the width and height of the display's native resolution.
+The `Display` module **MUST** have a `resolution` method that returns a `Types.Dimensions` object denoting the `width` and `height` of the display's native resolution as numbers, in pixels.
 
-If no display is present, both returned values **MUST** be zero.
+If no display is present, the height and width values **MUST** both be zero.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.resolution()
-//> [1920, 1080]
+//> { "width": 1920, "height": 1080 }
 ```
 
-### 5.5. Display Resolution Name
+### 5.5. Native Resolution Name
 
-The `Display` module **MUST** have a `resolutionName` method that returns a user-friendly name of the display's resolution as defined by `Media.ResolutionName`.
+The `Display` module **MUST** have a `resolutionName` method that returns a `Media.ResolutionName` value denoting the user-friendly name of the display's native resolution.
 
-If no display is present, a value of `unknown` is returned.
+If no display is present, a value of `unknown` **MUST** be returned.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.resolutionName()
@@ -396,9 +462,11 @@ Display.resolutionName()
 
 ### 5.6. Refresh Rate
 
-The `Display` module **MUST** have a `refreshRate` method that returns an number value for the optimal refresh rate that the display supports (in Hz).
+The `Display` module **MUST** have a `refreshRate` method that returns an number value denoting the optimal refresh rate of the display (in Hz).
 
-If no display is present, a value of zero is returned.
+If no display is present, a value of zero **MUST** be returned.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.refreshRate()
@@ -407,9 +475,11 @@ Display.refreshRate()
 
 ### 5.7. Colorimetry
 
-The `Display` module **MUST** have a `colorimetry` method that returns the display's supported colorimetry values as an array of `Media.Colorimetry` values.
+The `Display` module **MUST** have a `colorimetry` method that returns an array of `Media.Colorimetry` values denoting the display's supported colorimetry values.
 
-If no display is present, an empty array is returned.
+If no display is present, an empty array **MUST** be returned.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.colorimetry()
@@ -418,172 +488,225 @@ Display.colorimetry()
 
 ### 5.8. Manufacturer
 
-The `Display` module **MUST** have a `manufacturer` method that returns the display's manufacturer.
+The `Display` module **MUST** have a `manufacturer` method that returns a string denoting the display's manufacturer.
 
-If no display is present, an empty string is returned.
+If no display is present, an empty string **MUST** be returned.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.manufacturer()
 //> "Samsung Electric Company"
 ```
 
-### 5.9. Product Name
+### 5.9. Model
 
-The `Display` module **MUST** have a `productName` method that returns the display's product name / model number.
+The `Display` module **MUST** have a `model` method that returns a string denoting the display's model number/product name.
 
-If no display is present, an empty string is returned.
+If no display is present, an empty string **MUST** be returned.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
-Display.productName()
+Display.model()
 //> "Q80A"
 ```
 
 ### 5.10. Source Physical Address
 
-The `Display` module **MUST** have a `sourcePhysicalAddress` method that returns the display's source physical address.
+The `Display` module **MUST** have a `sourcePhysicalAddress` method that returns a string denoting the display's source physical address.
 
-If no display is present, an empty string is returned.
+If no display is present, an empty string **MUST** be returned.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
 Display.sourcePhysicalAddress()
 //> "3.0.0.0"
 ```
 
-## 6. Device Properties
+### 5.11. Electro Optical Transfer Function (EOTF)
+
+The `Display` module **MUST** have an `eotf` method that returns a `Display.TransferFunction` value denoting the display's EOTF.
+
+If no display is present, a value of `unknown` **MUST** be returned.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
+
+```javascript
+Display.eotf()
+//> "SMPTE_ST2084"
+```
+
+## 6. Device Support
 
 Apps need to know various aspects of the device, including its media playing capabilities.
 
 These will be surfaced in the `Device` module.
 
-Access to these APIs is governed by the `xrn:firebolt:capability:device:info` capability.
+### 6.1. Audio Mode
 
-### 6.1. Current Audio Mode
+The `Device` module **MUST** include an `audioMode` method that returns a `Media.AudioMode` value denoting the device's current audio output mode.
 
-The `Device` module **MUST** include an `audioMode` API that returns the currently configured audio output mode on the device.
+This method **MUST** have a corresponding event to notify listeners after a change to this property has been made and that change has taken effect.
 
-The API **MUST** return a value from the `Media.AudioMode` enum.
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
 
-### 6.2. Current Video Mode
+```javascript
+Device.audioMode()
+//> "stereo"
+```
 
-The `Device` module **MUST** have a `videoMode` method that returns the current video modes used by the device.
+### 6.2. Video Mode
 
-This method **MUST** return a value from the `Media.VideoMode` enum.
+The `Device` module **MUST** have a `videoMode` method that returns a `Media.VideoMode` value denoting the device's current video mode.
 
 If no display is present, a value of `unknown` is returned.
 
+This method **MUST** have a corresponding event to notify listeners after a change to this property has been made and that change has taken effect.
+
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
+
 ```javascript
 Device.videoMode()
-//> 1080p60
+//> "1080p60"
 ```
 
-### 6.3. Supported Video Modes
+### 6.3. Pre-Video Mode Change Event
 
-The `Device` module **MUST** have a `videoModes` method that returns an array of valid video modes that the device and display together support.
+The `Device` module **MUST** have a `onPreVideoModeChanged` event that that returns a `Media.VideoMode` value denoting the device's current video mode.
 
-This method **MUST** return an array with one or more values from the `Media.VideoMode` enum.
+This method **MUST** notify listeners after a change to this property has been made but before the change has taken effect.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
-Device.supportedVideoModes()
+Device.onPreVideoModeChanged((value) => {
+  console.log(value)
+  //> "1080p60"
+})
+```
+
+### 6.4. Supported Audio Modes
+
+The `Device` module **MUST** have an `audioModes` method that returns an array of `Media.AudioMode` values denoting the audio modes supported by the device.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
+
+```javascript
+Device.audioModes()
+//> ["passthrough", "stereo", "surround"]
+```
+
+### 6.5. Supported Video Modes
+
+The `Device` module **MUST** have a `videoModes` method that returns an array of `Media.VideoMode` values denoting the video modes supported by the device.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
+
+```javascript
+Device.videoModes()
 //> ["720p50", "720p60", "1080p50", "1080p60"]
 ```
 
-### 6.4. Video Resolution
+### 6.6. Video Resolution
 
-The `Device` module **MUST** have a `videoResolution` method that returns the width and height of the current video output resolution.
+The `Device` module **MUST** have a `videoResolution` method that returns a `Types.Dimensions` object denoting the current video output resolution, in pixels.
 
-If no display is present, both returned values **MUST** be zero.
+If no display is present, the height and width values **MUST** both be zero.
+
+This method **MUST** have a corresponding event to notify listeners after a change to the device's `videoMode` property has been made and that change has taken effect.
+
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
 Device.videoResolution()
-//> [1920, 1080]
+//> { "width": 1920, "height": 1080 }
 ```
 
-### 6.5. Current HDR Profile
+### 6.7. HDR Profile
 
-The `Device` module **MUST** have a `hdrProfile` method that returns the HDR profile currently used by the device for video output.
+The `Device` module **MUST** have an `hdrProfile` method that returns a `Media.HDRProfile` value denoting the HDR profile currently set on the device for video output.
 
-This method **MUST** return a value from the `Media.HDRProfile` enum.
+This method **MUST** have a corresponding event to notify listeners after this property has changed and that change has taken effect.
+
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
 Device.hdrProfile()
 //> "hdr10plus"
 ```
 
-### 6.6. Supported HDR Profiles
+### 6.8. Supported HDR Profiles
 
-The `Device` module **MUST** have an `hdrProfiles` method that returns the HDR profiles that the device supports, regardless of any connected display.
+The `Device` module **MUST** have an `hdrProfiles` method that returns an array of `Media.HDRProfile` values denoting the HDR profiles supported by the device.
+
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
-Device.hdrProfile()
-//> ["hdr10", "hdr10plus", "hlg", "sdr"]
+Device.hdrProfiles()
+//> ["dolbyVision", "hdr10", "hdr10plus", "hlg"]
 ```
 
-### 6.7. Supported HDCP Version
+### 6.9. Maximum Supported HDCP Version
 
-The `Device` module **MUST** have a `hdcpVersion` method that returns the latest HDCP version supported by the device.
+The `Device` module **MUST** have a `maxHdcpVersion` method that returns a `Media.HDCPVersion` value denoting the maximum HDCP version supported by the device for media protection.
 
-This method **MUST** return a value such as:
-
-- `1.4`
-- `2.2`
-- `unknown`
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
-Device.hdcpVersion()
+Device.maxHdcpVersion()
 //> "2.2"
 ```
 
-### 6.8. Source Frame Rate Used
+### 6.11. Color Depth
 
-The `Device` module **MUST** have a boolean `sourceFrameRateUsed` API.
+The `Device` module **MUST** have a `colorDepth` method that returns a `Media.ColorDepth` value denoting the color depth currently set on the device for video output.
 
-This API **MUST** return `true` if the HDMI output frame rate is set to follow the video source's frame rate.
+This method **MUST** have a corresponding event to notify listeners after this property has changed and that change has taken effect.
 
-Otherwise, this API **MUST** return `false`.
+Access to these methods **MUST** be governed by the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
-Device.sourceFrameRateUsed()
-//> true
+Device.colorDepth()
+//> "10"
 ```
 
-### 6.9. On Audio Output Changed
+### 6.11. Maximum Supported Color Depth
 
-The `Device` module **MUST** have an `onAudioOutputChanged` event API.
+The `Device` module **MUST** have a `maxColorDepth` method that returns a `Media.ColorDepth` value denoting the maximum color depth supported by the device for video output.
 
-This event must notify listeners when any of the following properties have changed:
-
-- `Device.audioMode`
-
-> TODO: Add more here
-
-This API **MUST** return the current property values of the above.
+Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
-Device.onAudioOutputChanged()
-//> {
-//>   "audioMode": "stereo"
-//> }
+Device.maxColorDepth()
+//> "10"
 ```
 
-### 6.10. On Video Output Changed
+### 6.12. Color Space & Chroma Subsampling
 
-The `Device` module **MUST** have an `onVideoOutputChanged` event API.
+The `Device` module **MUST** have a `colorSpace` method that returns a `Media.ColorSpace` value denoting the color space and chroma subsampling value currently set on the device for video output.
 
-This event must notify listeners when any of the following properties have changed:
+This method **MUST** have a corresponding event to notify listeners after this property has changed and that change has taken effect.
 
-- `Device.hdrProfile`
-- `Device.sourceFrameRateUsed`
-- `Device.videoMode`
-
-This API **MUST** return the current property values of the above.
+Access to these methods **MUST** be governed by the `xrn:firebolt:capability:device:info` capability.
 
 ```javascript
-Device.onAudioOutputChanged()
-//> {
-//>   "hdrProfile": "hlg",
-//>   "sourceFrameRateUsed": false,
-//>   "videoMode": "1080p60",
-//> }
+Device.colorSpace()
+//> "YCbCr422"
+```
+
+### 6.13. Quantization Range
+
+The `Device` module **MUST** have a `quantizationRange` method that returns a `Device.QuantizationRange` value denoting the quantization range currently set on the device for video output.
+
+This method **MUST** have a corresponding event to notify listeners after this property has changed and that change has taken effect.
+
+Access to these methods **MUST** be governed by the `xrn:firebolt:capability:device:info` capability.
+
+```javascript
+Device.quantizationRange()
+//> "limited"
 ```
 
 ## 7. Media Info
@@ -612,26 +735,26 @@ MediaInfo.videoFormat()
 
 #### 7.1.1. Video Format
 
-The `MediaInfo` module **MUST** have a `videoFormat` API that returns an `object` with the video codec (e.g. `avc`, `vp9`, etc.) and resolution of the media currently in the media pipeline (either playing or paused).
+The `MediaInfo` module **MUST** have a `videoFormat` method that returns an `object` with the video codec (e.g. `avc`, `vp9`, etc.) and resolution of the media currently in the media pipeline (either playing or paused).
 
 The `videoFormat` result **MUST** have an `pipelineId` integer property that denotes the media pipeline/session ID.
 
-The `videoFormat` result **MUST** have a `codec` property with one of the values from the `Media.VideoCodec` enum.
+The `videoFormat` result **MUST** have a `format` property with one of the values from the `Media.VideoFormat` enum.
 
 The `videoFormat` result **MUST** have an `hdr` array property with zero or more `Media.HDRProfile` values.
 
 If a value is included in the `hdr` array then the media currently in the media pipeline **MUST** include the denoted HDR metadata in the decoded video.
 
-The `videoFormat` result **MUST** have a `resolution` property with a `Media.Dimensions` value.
+The `videoFormat` result **MUST** have a `resolution` property with a `Types.Dimensions` value.
 
 The `videoFormat` result **MAY** have a `codecProfile` string property that denotes the profile of the codec.
 
 The `videoFormat` result **MAY** have a `codecLevel` string property that denotes the level of the codec.
 
-The `videoFormat` API **MUST** be a Firebolt `property:readonly` API, and
+The `videoFormat` method **MUST** be a Firebolt `property:readonly` API, and
 have a corresponding `onVideoFormatChanged` notification.
 
-Use of the `videoFormat` APIs require access to the `use` role of the
+Access to the `videoFormat` method requires access to the `use` role of the
 `xrn:firebolt:capability:media-info:video-format` capability.
 
 ```javascript
@@ -639,25 +762,25 @@ MediaInfo.videoFormat(1)
 /*
 {
   "pipelineId": 1,
-  "codec": "hevc",
   "codecLevel": "4.2",
   "codecProfile": "main",
   "container": "video/mp4",
+  "format": "hevc",
   "frameRate": 30,
   "hdr": [
     "hdr10"
   ],
-  "resolution": [
-    1920,
-    1080
-  ]
+  "resolution": {
+    "width": 1920,
+    "height": 1080
+  }
 }
 */
 ```
 
 #### 7.1.2. Audio Format
 
-The `MediaInfo` module **MUST** have a `audioFormat` API that returns an `object` with the below values describing media currently in the media pipeline (either playing or paused).
+The `MediaInfo` module **MUST** have a `audioFormat` method that returns an `object` with the below values describing media currently in the media pipeline (either playing or paused).
 
 The `audioFormat` result **MUST** have an `pipelineId` integer property that denotes the media pipeline/session ID.
 
@@ -665,7 +788,7 @@ The `audioFormat` result **MUST** have a `biteRate` number property that denotes
 
 The `audioFormat` result **MUST** have a `channels` string property that denotes the audio output channels.
 
-The `audioFormat` result **MUST** have a `codec` property with one of the values from the `Media.AudioCodec` enum.
+The `audioFormat` result **MUST** have a `format` property with one of the values from the `Media.AudioFormat` enum.
 
 The `audioFormat` result **MUST** have a `sampleRate` number property that denotes the audio sample rate.
 
@@ -673,9 +796,9 @@ The `audioFormat` result **MAY** have a `codecLevel` string property that denote
 
 The `audioFormat` result **MAY** have a `codecProfile` string property that denotes the profile of the codec.
 
-The `audioFormat` API **MUST** be a Firebolt `property:readonly` API, and have a corresponding `onAudioFormatChanged` notification.
+The `audioFormat` method **MUST** have a corresponding `onAudioFormatChanged` notification.
 
-Use of the `audioFormat` APIs require access to the `use` role of the `xrn:firebolt:capability:media-info:audio-format` capability.
+Access to the `audioFormat` method requires access to the `use` role of the `xrn:firebolt:capability:media-info:audio-format` capability.
 
 ```javascript
 MediaInfo.audioFormat(1)
@@ -684,7 +807,7 @@ MediaInfo.audioFormat(1)
   "pipelineId": 1,
   "bitRate": 128,
   "channels": 2,
-  "codec": "aac",
+  "format": "aac",
   "container": "audio/mp4",
   "sampleRate": 48
 }
@@ -697,63 +820,63 @@ First party apps need a way to query which media formats are currently being out
 
 #### 7.2.1. Active Video Formats
 
-The `MediaInfo` module **MUST** have a `activeVideoFormats` API that returns an array of `objects` for all media currently in the media pipeline (either playing or paused).
+The `MediaInfo` module **MUST** have a `activeVideoFormats` method that returns an array of `objects` for all media currently in the media pipeline (either playing or paused).
 
-Each item in the `activeVideoFormats` result array **MUST** conform to the same requirements as the individual results from the [`videoFormat` API](#611-video-format).
+Each item in the `activeVideoFormats` result array **MUST** conform to the same requirements as the individual results from the [`videoFormat` method](#711-video-format).
 
-Additionally, the `MediaInfo` module **MUST** have an `onActiveVideoFormatsChanged` notifier that fires whenever any pipeline starts, stops, or changes its current video format.
+Additionally, the `MediaInfo` module **MUST** have an `onActiveVideoFormatsChanged` event that fires whenever any pipeline starts, stops, or changes its current video format.
 
 Example:
 
 ```javascript
-MediaInfo.activeVideoFormats().find(f => f.codec === Media.VideoCodec.HEVC)
+MediaInfo.activeVideoFormats().find(f => f.format === Media.VideoFormat.HEVC)
 /*
 [
   {
-    "id": 1,
-    "codec": "hevc",
+    "pipelineId": 1,
     "codecLevel": "4.2",
     "codecProfile": "main",
     "container": "video/mp4",
+    "format": "hevc",
     "frameRate": 30,
     "hdr": [
         "hdr10"
     ],
-    "resolution": [
-        1920,
-        1080
-    ]
+    "resolution": {
+      "width": 1920,
+      "height": 1080
+    }
   }
 ]
 */
 ```
 
-Access to these APIs is gated by `manage` access to the `xrn:firebolt:capability:media-info:video-format` capability.
+Access to the `activeVideoFormats` method is gated by `manage` access to the `xrn:firebolt:capability:media-info:video-format` capability.
 
 #### 7.2.2. Active Audio Formats
 
-The `MediaInfo` module **MUST** have a `activeAudioFormats` API that returns an array of `objects` for all media currently in the media pipeline (either playing or paused).
+The `MediaInfo` module **MUST** have a `activeAudioFormats` method that returns an array of `objects` for all media currently in the media pipeline (either playing or paused).
 
-Each item in the `activeAudioFormats` result array **MUST** conform to the same requirements as the individual results from the [`audioFormat` API](#612-audio-format).
+Each item in the `activeAudioFormats` result array **MUST** conform to the same requirements as the individual results from the [`audioFormat` method](#712-audio-format).
 
-Additionally, the `MediaInfo` module **MUST** have an `onActiveAudioFormatsChanged` notifier that fires whenever any pipeline starts, stops, or changes its current audio format.
+Additionally, the `MediaInfo` module **MUST** have an `onActiveAudioFormatsChanged` event that fires whenever any pipeline starts, stops, or changes its current audio format.
 
 Example:
 
 ```javascript
-MediaInfo.activeAudioFormats().find(f => f.codec === Media.AudioCodec.AAC)
+MediaInfo.activeAudioFormats().find(f => f.format === Media.AudioFormat.AAC)
 /*
 [
   {
-    "id": 1,
+    "pipelineId": 1,
     "bitRate": 128,
     "channels": 2,
-    "codec": "aac",
     "container": "audio/mp4",
+    "format": "aac",
     "sampleRate": 48
   }
 ]
 */
 ```
 
-Access to these APIs is gated by `manage` access to the `xrn:firebolt:capability:media-info:audio-format` capability.
+Access to the `activeAudioFormats` method is gated by `manage` access to the `xrn:firebolt:capability:media-info:audio-format` capability.
