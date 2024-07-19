@@ -1,0 +1,320 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "VideoOutput",
+        "description": "A module for the device's video output system, including its output capabilities and configuration.",
+        "version": "0.0.0"
+    },
+    "methods": [
+        {
+            "name": "colorDepth",
+            "summary": "The color depth set for video output.",
+            "params": [],
+            "tags": [
+                {
+                    "name": "property:readonly"
+                },
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:config"
+                    ]
+                }
+            ],
+            "result": {
+                "name": "colorDepth",
+                "summary": "The color depth set.",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/ColorDepth"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "10"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "colorSpace",
+            "summary": "The color space and chroma set for video output.",
+            "params": [],
+            "tags": [
+                {
+                    "name": "property:readonly"
+                },
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:config"
+                    ]
+                }
+            ],
+            "result": {
+                "name": "colorSpace",
+                "summary": "The color space set on the device.",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/ColorSpace"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "YCbCr422"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "currentSettings",
+            "summary": "A convenience method that returns various properties currently set on the device related to video output.",
+            "tags": [
+                {
+                    "name": "property:readonly"
+                },
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:config"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "currentSettings",
+                "summary": "Current video output properties",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "colorDepth": {
+                            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/ColorDepth"
+                        },
+                        "colorSpace": {
+                            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/ColorSpace"
+                        },
+                        "hdrProfile": {
+                            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
+                        },
+                        "mode": {
+                            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoMode"
+                        },
+                        "resolution": {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Dimensions"
+                        }
+                    },
+                    "required": [
+                        "colorDepth",
+                        "colorSpace",
+                        "hdrProfile",
+                        "mode",
+                        "resolution"
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "colorDepth": "10",
+                            "colorSpace": "YCbCr422",
+                            "hdrProfile": "hdr10plus",
+                            "mode": "1080p60",
+                            "resolution": {
+                                "width": 1920,
+                                "height": 1080
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "hdrProfile",
+            "summary": "The HDR profile set for video output.",
+            "tags": [
+                {
+                    "name": "property:readonly"
+                },
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:config"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "hdrProfile",
+                "summary": "The HDR profile",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "hdr10plus"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "quantizationRange",
+            "summary": "The quantization range set for video output.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:config"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "quantizationRange",
+                "summary": "The quantization range",
+                "schema": {
+                    "$ref": "#/components/schemas/QuantizationRange"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "limited"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "mode",
+            "summary": "The current video output mode of the device.",
+            "tags": [
+                {
+                    "name": "property:readonly"
+                },
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:config"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "mode",
+                "summary": "The video output mode.",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoMode"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "1080p60"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onModeWillChange",
+            "summary": "Be notified when the video output mode setting has changed but it has not yet taken effect on the device.",
+            "tags": [
+                {
+                    "name": "event"
+                },
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:config"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "mode",
+                "summary": "The video output mode.",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoMode"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "1080p60"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "resolution",
+            "summary": "The width and height of the current video output, in pixels.",
+            "tags": [
+                {
+                    "name": "property:readonly"
+                },
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:config"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "resolution",
+                "summary": "The video output resolution",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Dimensions"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "width": 1920,
+                            "height": 1080
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "components": {
+        "schemas": {
+            "QuantizationRange": {
+                "description": "The quantization range of video output",
+                "type": "string",
+                "enum": [
+                    "full",
+                    "limited",
+                    "unknown"
+                ]
+            }
+        }
+    }
+}

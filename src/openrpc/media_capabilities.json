@@ -1,0 +1,455 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "MediaCapabilities",
+        "description": "A module for querying the capabilities of the device all of its connected perirpherals (such as displays and soundbars).",
+        "version": "0.0.0"
+    },
+    "methods": [
+        {
+            "name": "audioCodecs",
+            "summary": "The audio codecs commonly supported by the device and all its connected audio peripherals.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "audioCodecs",
+                "summary": "The supported audio codecs",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioCodec"
+                    }
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": [
+                            "aac",
+                            "ac3",
+                            "ac4",
+                            "eac3",
+                            "mpeg3",
+                            "pcm"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "videoCodecs",
+            "summary": "The video codecs commonly supported by the device and all of its connected video peripherals.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "videoCodecs",
+                "summary": "The supported video codecs",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoCodec"
+                    }
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": [
+                            "av1",
+                            "avc",
+                            "hevc",
+                            "mpeg1",
+                            "mpeg2",
+                            "vp8",
+                            "vp9"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "audioFormatSupported",
+            "summary": "Check whether content of a given audio format is supported by the device's current configuration and its AV output system.  The result is based on the device's best possible audio output configuration. These values may change as different AV inputs or peripherals are activated or connected.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [
+                {
+                    "name": "codec",
+                    "summary": "Audio codec used to check whether its supported.",
+                    "required": true,
+                    "schema": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioCodec"
+                    }
+                },
+                {
+                    "name": "options",
+                    "summary": "Additional options to use for checking whether an audio format is supported by the device.  All values must be true for the content to be playable.",
+                    "schema": {
+                        "$ref": "#/components/schemas/AudioFormatOptions"
+                    }
+                }
+            ],
+            "result": {
+                "name": "audioFormatSupported",
+                "summary": "Whether audio content of the given format is supported by the device's current configuration.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Check whether EAC3 codec with Atmos is supported",
+                    "params": [
+                        {
+                            "name": "codec",
+                            "value": "eac3"
+                        },
+                        {
+                            "name": "options",
+                            "value": {
+                                "atmos": true
+                            }
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "videoFormatSupported",
+            "summary": "Check whether video content of the given format is supported by the device's current configuration and its AV output system.  These values may change as different AV inputs or peripherals are activated or connected.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [
+                {
+                    "name": "codec",
+                    "summary": "The video codec to check whether its supported by the device's current configuration.",
+                    "required": true,
+                    "schema": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoCodec"
+                    }
+                },
+                {
+                    "name": "options",
+                    "summary": "Additional options to use for checking whether a video is supported by the device.  All values must be true for the content to be playable.",
+                    "schema": {
+                        "$ref": "#/components/schemas/VideoFormatOptions"
+                    }
+                }
+            ],
+            "result": {
+                "name": "videoFormatSupported",
+                "summary": "Whether video content of the given format is supported by the device's current configuration.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Specify the video format to check",
+                    "params": [
+                        {
+                            "name": "codec",
+                            "value": "hevc"
+                        },
+                        {
+                            "name": "options",
+                            "value": {
+                                "resolution": {
+                                    "width": 1920,
+                                    "height": 1080
+                                }
+                            }
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "audioModes",
+            "summary": "The audio output modes commonly supported by the device and its connected audio peripherals",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "audioModes",
+                "summary": "The supported audio output modes",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioMode"
+                    }
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": [
+                            "passthrough",
+                            "stereo",
+                            "surround"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "videoModes",
+            "summary": "The video output modes commonly supported by the device and its connected video peripherals.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "videoModes",
+                "summary": "The supported video output modes",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoMode"
+                    }
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": [
+                            "720p50",
+                            "720p60",
+                            "1080p50",
+                            "1080p60"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "colorDepth",
+            "summary": "The maximum color depth commonly supported by the device and its connected video peripherals.",
+            "params": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "result": {
+                "name": "colorDepth",
+                "summary": "The supported color depth",
+                "schema": {
+                    "type": "number"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": 10
+                    }
+                }
+            ]
+        },
+        {
+            "name": "hdrProfiles",
+            "summary": "The HDR profiles commonly supported by the device and its connected video peripherals.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "hdrProfiles",
+                "summary": "The supported HDR profiles",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
+                    }
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": [
+                            "hdr10",
+                            "hdr10plus",
+                            "hlg"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "atmosSupported",
+            "summary": "Whether or not Dolby Atmos immersive audio is commonly supported by the device and its connected audio peripherals.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "atmosSupported",
+                "summary": "Whether Dolby Atmos is supported",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": true
+                    }
+                }
+            ]
+        }
+    ],
+    "components": {
+        "schemas": {
+            "AudioFormatOptions": {
+                "description": "Options for checking audio playback support",
+                "type": "object",
+                "properties": {
+                    "atmos": {
+                        "description": "Whether Dolby Atmos support is being requested",
+                        "type": "boolean"
+                    },
+                    "codecLevel": {
+                        "description": "The level of the audio codec",
+                        "type": "string"
+                    },
+                    "codecProfile": {
+                        "description": "The profile of the audio codec",
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioCodecProfile"
+                    },
+                    "container": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/AudioContainer"
+                    },
+                    "sampleRate": {
+                        "description": "The sample rate of the audio, in kHz",
+                        "type": "number"
+                    }
+                }
+            },
+            "VideoFormatOptions": {
+                "description": "Options for checking video playback support",
+                "type": "object",
+                "properties": {
+                    "atmos": {
+                        "description": "Whether Dolby Atmos support is being requested",
+                        "type": "boolean"
+                    },
+                    "codecLevel": {
+                        "description": "The level of the video codec",
+                        "type": "string",
+                        "enum": [
+                            "4.1",
+                            "4.2",
+                            "5.0",
+                            "5.1",
+                            "high",
+                            "main"
+                        ]
+                    },
+                    "codecProfile": {
+                        "description": "The profile of the video codec",
+                        "type": "string",
+                        "enum": [
+                            "high",
+                            "main",
+                            "main10",
+                            "p0",
+                            "p2"
+                        ]
+                    },
+                    "container": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoContainer"
+                    },
+                    "frameRate": {
+                        "description": "The frame rate of the video content",
+                        "type": "integer"
+                    },
+                    "hdr": {
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
+                    },
+                    "resolution": {
+                        "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Dimensions"
+                    }
+                }
+            }
+        }
+    }
+}

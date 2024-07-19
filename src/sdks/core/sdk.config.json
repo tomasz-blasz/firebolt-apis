@@ -27,18 +27,18 @@
             ]
         },
         {
+            "module": "Audio",
+            "use": [
+                "xrn:firebolt:capability:audio:config"
+            ]
+        },
+        {
             "module": "Authentication",
             "use": [
                 "xrn:firebolt:capability:token:device",
                 "xrn:firebolt:capability:token:platform",
                 "xrn:firebolt:capability:token:root",
                 "xrn:firebolt:capability:token:session"
-            ]
-        },
-        {
-            "module": "AVSystem",
-            "use": [
-                "xrn:firebolt:capability:avsystem:info"
             ]
         },
         {
@@ -117,10 +117,9 @@
             ]
         },
         {
-            "module": "MediaInfo",
+            "module": "MediaCapabilities",
             "use": [
-                "xrn:firebolt:capability:media-info:audio-format",
-                "xrn:firebolt:capability:media-info:video-format"
+                "xrn:firebolt:capability:media-capabilities:info"
             ]
         },
         {
@@ -155,6 +154,12 @@
             "module": "SecureStorage",
             "use": [
                 "xrn:firebolt:capability:storage:secure"
+            ]
+        },
+        {
+            "module": "VideoOutput",
+            "use": [
+                "xrn:firebolt:capability:video:config"
             ]
         }
     ]

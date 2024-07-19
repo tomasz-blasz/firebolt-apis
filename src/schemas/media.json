@@ -2,20 +2,18 @@
     "$id": "https://meta.comcast.com/firebolt/schemas/media",
     "title": "Media",
     "definitions": {
-        "AudioFormat": {
+        "AudioCodec": {
             "type": "string",
-            "description": "Audio format",
+            "description": "Audio codec",
             "enum": [
                 "aac",
                 "ac3",
                 "ac4",
-                "dts-x",
                 "eac3",
                 "mpeg3",
                 "opus",
                 "pcm",
                 "truehd",
-                "unknown",
                 "vorbis"
             ]
         },
@@ -93,15 +91,6 @@
                 "unknown"
             ]
         },
-        "HDCPVersion": {
-            "type": "string",
-            "description": "HDCP version",
-            "enum": [
-                "1.4",
-                "2.2",
-                "unknown"
-            ]
-        },
         "HDRProfile": {
             "type": "string",
             "description": "HDR profile",
@@ -126,6 +115,19 @@
                 "unknown"
             ]
         },
+        "VideoCodec": {
+            "type": "string",
+            "description": "Video codec",
+            "enum": [
+                "av1",
+                "avc",
+                "hevc",
+                "mpeg1",
+                "mpeg2",
+                "vp8",
+                "vp9"
+            ]
+        },
         "VideoContainer": {
             "description": "Video container format",
             "type": "string",
@@ -134,20 +136,6 @@
                 "video/mp2t",
                 "video/mp4",
                 "video/webm"
-            ]
-        },
-        "VideoFormat": {
-            "type": "string",
-            "description": "video format",
-            "enum": [
-                "av1",
-                "avc",
-                "hevc",
-                "mpeg1",
-                "mpeg2",
-                "vp8",
-                "vp9",
-                "vp10"
             ]
         },
         "VideoMode": {
