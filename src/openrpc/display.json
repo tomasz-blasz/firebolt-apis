@@ -62,7 +62,7 @@
                 "schema": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/components/schemas/Colorimetry"
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/Colorimetry"
                     }
                 }
             },
@@ -348,25 +348,5 @@
                 }
             ]
         }
-    ],
-    "components": {
-        "schemas": {
-            "Colorimetry": {
-                "description": "Colorimetry",
-                "type": "string",
-                "enum": [
-                    "BT2020cYCC",
-                    "BT2020RGB",
-                    "BT2020YCC",
-                    "DCI-P3",
-                    "opRGB",
-                    "opYCC601",
-                    "sYCC601",
-                    "xvYCC601",
-                    "xvYCC709",
-                    "unknown"
-                ]
-            }
-        }
-    }
+    ]
 }

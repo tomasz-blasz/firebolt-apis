@@ -79,6 +79,22 @@
                 "unknown"
             ]
         },
+        "Colorimetry": {
+            "description": "Colorimetry",
+            "type": "string",
+            "enum": [
+                "BT2020cYCC",
+                "BT2020RGB",
+                "BT2020YCC",
+                "DCI-P3",
+                "opRGB",
+                "opYCC601",
+                "sYCC601",
+                "xvYCC601",
+                "xvYCC709",
+                "unknown"
+            ]
+        },
         "ColorSpace": {
             "type": "string",
             "description": "Color space",

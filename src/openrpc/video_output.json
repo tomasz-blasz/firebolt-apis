@@ -40,6 +40,36 @@
             ]
         },
         {
+            "name": "colorimetry",
+            "summary": "The colorimetry value set for video output.",
+            "params": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:video-output:colorimetry"
+                    ]
+                }
+            ],
+            "result": {
+                "name": "colorimetry",
+                "summary": "The colorimetry value set.",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/Colorimetry"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "BT2020YCC"
+                    }
+                }
+            ]
+        },
+        {
             "name": "colorSpace",
             "summary": "The color space and chroma set for video output.",
             "params": [],
@@ -96,6 +126,9 @@
                         "colorDepth": {
                             "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/ColorDepth"
                         },
+                        "colorimetry": {
+                            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/Colorimetry"
+                        },
                         "colorSpace": {
                             "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/ColorSpace"
                         },
@@ -111,6 +144,7 @@
                     },
                     "required": [
                         "colorDepth",
+                        "colorimetry",
                         "colorSpace",
                         "hdrProfile",
                         "mode",
@@ -126,6 +160,7 @@
                         "name": "Default Result",
                         "value": {
                             "colorDepth": "10",
+                            "colorimetry": "BT2020YCC",
                             "colorSpace": "YCbCr422",
                             "hdrProfile": "hdr10plus",
                             "mode": "1080p60",

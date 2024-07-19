@@ -160,6 +160,7 @@
             "module": "VideoOutput",
             "use": [
                 "xrn:firebolt:capability:video-output:colordepth",
+                "xrn:firebolt:capability:video-output:colorimetry",
                 "xrn:firebolt:capability:video-output:colorspace",
                 "xrn:firebolt:capability:video-output:hdrprofile",
                 "xrn:firebolt:capability:video-output:info",
