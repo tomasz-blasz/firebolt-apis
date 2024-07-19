@@ -164,7 +164,6 @@
                 "xrn:firebolt:capability:video-output:hdrprofile",
                 "xrn:firebolt:capability:video-output:info",
                 "xrn:firebolt:capability:video-output:mode",
-                "xrn:firebolt:capability:video-output:mode",
                 "xrn:firebolt:capability:video-output:quantization"
             ]
         }
