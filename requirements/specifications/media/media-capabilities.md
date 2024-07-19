@@ -573,7 +573,7 @@ The `AudioOutput` module **MUST** include a `mode` method that returns a `Media.
 
 This method **MUST** have a corresponding `onModeChanged` event to notify listeners after a change to this property has been made and that change has taken effect.
 
-Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:audio-output:config` capability.
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:audio-output:mode` capability.
 
 ```javascript
 AudioOutput.mode()
@@ -596,7 +596,7 @@ This method **MUST** have a corresponding `onModeWillChange` event to notify lis
 
 This method **MUST** have a corresponding `onModeChanged` event to notify listeners after a change to this property has been made and that change has taken effect.
 
-Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:video-output:config` capability.
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:video-output:mode` capability.
 
 ```javascript
 VideoOutput.mode()
@@ -611,7 +611,7 @@ If no display is present, the height and width values **MUST** both be zero.
 
 This method **MUST** have a corresponding `onResolutionChanged` event to notify listeners after a change to the device's `videoMode` property has been made and that change has taken effect.
 
-Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:video-output:config` capability.
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:video-output:mode` capability.
 
 ```javascript
 VideoOutput.resolution()
@@ -624,7 +624,7 @@ The `VideoOutput` module **MUST** have an `hdrProfile` method that returns a `Me
 
 This method **MUST** have a corresponding `onHdrProfileChanged` event to notify listeners after this property has changed and that change has taken effect.
 
-Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:video-output:config` capability.
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:video-output:hdrprofile` capability.
 
 ```javascript
 VideoOutput.hdrProfile()
@@ -637,7 +637,7 @@ The `VideoOutput` module **MUST** have a `colorDepth` method that returns a `Med
 
 This method **MUST** have a corresponding `onColorDepthChanged` event to notify listeners after this property has changed and that change has taken effect.
 
-Access to these methods **MUST** be governed by the `xrn:firebolt:capability:video-output:config` capability.
+Access to these methods **MUST** be governed by the `xrn:firebolt:capability:video-output:colordepth` capability.
 
 ```javascript
 VideoOutput.colorDepth()
@@ -650,7 +650,7 @@ The `VideoOutput` module **MUST** have a `colorSpace` method that returns a `Med
 
 This method **MUST** have a corresponding `onColorSpaceChanged` event to notify listeners after this property has changed and that change has taken effect.
 
-Access to these methods **MUST** be governed by the `xrn:firebolt:capability:video-output:config` capability.
+Access to these methods **MUST** be governed by the `xrn:firebolt:capability:video-output:colorspace` capability.
 
 ```javascript
 VideoOutput.colorSpace()
@@ -661,7 +661,7 @@ VideoOutput.colorSpace()
 
 The `VideoOutput` module **MUST** have a `quantizationRange` method that returns a `VideoOutput.QuantizationRange` value describing the quantization range currently set for video output.
 
-Access to this method **MUST** be governed by the `xrn:firebolt:capability:video-output:config` capability.
+Access to this method **MUST** be governed by the `xrn:firebolt:capability:video-output:quantization` capability.
 
 ```javascript
 VideoOutput.quantizationRange()
@@ -682,7 +682,7 @@ This method **MUST** return the following properties:
 | `mode`       | `Media.VideoMode`  |
 | `resolution` | `Types.Dimensions` |
 
-Access to this method **MUST** be governed by the `xrn:firebolt:capability:video-output:config` capability.
+Access to this method **MUST** be governed by the `xrn:firebolt:capability:video-output:info` capability.
 
 This method **MUST** have a corresponding `onCurrentSettingsChanged` event to notify listeners after any of the specified output properties have changed and that those changes have taken effect.
 

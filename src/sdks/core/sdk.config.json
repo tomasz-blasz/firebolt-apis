@@ -27,9 +27,9 @@
             ]
         },
         {
-            "module": "Audio",
+            "module": "AudioOutput",
             "use": [
-                "xrn:firebolt:capability:audio:config"
+                "xrn:firebolt:capability:audio-output:mode"
             ]
         },
         {
@@ -159,7 +159,13 @@
         {
             "module": "VideoOutput",
             "use": [
-                "xrn:firebolt:capability:video:config"
+                "xrn:firebolt:capability:video-output:colordepth",
+                "xrn:firebolt:capability:video-output:colorspace",
+                "xrn:firebolt:capability:video-output:hdrprofile",
+                "xrn:firebolt:capability:video-output:info",
+                "xrn:firebolt:capability:video-output:mode",
+                "xrn:firebolt:capability:video-output:mode",
+                "xrn:firebolt:capability:video-output:quantization"
             ]
         }
     ]
