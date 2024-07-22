@@ -1,0 +1,291 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "MediaInfo",
+        "description": "A module for querying the capabilities of the device all of its connected perirpherals (such as displays and soundbars).",
+        "version": "0.0.0"
+    },
+    "methods": [
+        {
+            "name": "audioFormatSupported",
+            "summary": "Check whether content of a given audio format is supported by the device's current configuration and its AV output system.  The result is based on the device's best possible audio output configuration. These values may change as different AV inputs or peripherals are activated or connected.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [
+                {
+                    "name": "codec",
+                    "summary": "Audio codec used to check whether its supported.",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/components/schemas/AudioCodec"
+                    }
+                },
+                {
+                    "name": "options",
+                    "summary": "Additional options to use for checking whether an audio format is supported by the device.  All values must be true for the content to be playable.",
+                    "schema": {
+                        "$ref": "#/components/schemas/AudioFormatOptions"
+                    }
+                }
+            ],
+            "result": {
+                "name": "audioFormatSupported",
+                "summary": "Whether audio content of the given format is supported by the device's current configuration.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Check whether EAC3 codec with Atmos is supported",
+                    "params": [
+                        {
+                            "name": "codec",
+                            "value": "eac3"
+                        },
+                        {
+                            "name": "options",
+                            "value": {
+                                "atmos": true
+                            }
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "videoFormatSupported",
+            "summary": "Check whether video content of the given format is supported by the device's current configuration and its AV output system.  These values may change as different AV inputs or peripherals are activated or connected.",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:media-capabilities:info"
+                    ]
+                }
+            ],
+            "params": [
+                {
+                    "name": "codec",
+                    "summary": "The video codec to check whether its supported by the device's current configuration.",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/components/schemas/VideoCodec"
+                    }
+                },
+                {
+                    "name": "options",
+                    "summary": "Additional options to use for checking whether a video is supported by the device.  All values must be true for the content to be playable.",
+                    "schema": {
+                        "$ref": "#/components/schemas/VideoFormatOptions"
+                    }
+                }
+            ],
+            "result": {
+                "name": "videoFormatSupported",
+                "summary": "Whether video content of the given format is supported by the device's current configuration.",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Specify the video format to check",
+                    "params": [
+                        {
+                            "name": "codec",
+                            "value": "hevc"
+                        },
+                        {
+                            "name": "options",
+                            "value": {
+                                "resolution": {
+                                    "width": 1920,
+                                    "height": 1080
+                                }
+                            }
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": true
+                    }
+                }
+            ]
+        }
+    ],
+    "components": {
+        "schemas": {
+            "AudioCodec": {
+                "type": "string",
+                "description": "Audio codec",
+                "enum": [
+                    "aac",
+                    "ac3",
+                    "ac4",
+                    "eac3",
+                    "mpeg3",
+                    "opus",
+                    "pcm",
+                    "truehd",
+                    "vorbis"
+                ]
+            },
+            "AudioCodecLevel": {
+                "description": "Audio codec level",
+                "type": "string",
+                "enumKeyPrefix": "level",
+                "enum": [
+                    "3.0",
+                    "3.1",
+                    "4.0",
+                    "4.1",
+                    "4.2",
+                    "5.0",
+                    "5.1"
+                ]
+            },
+            "AudioCodecProfile": {
+                "description": "Audio codec profile",
+                "type": "string",
+                "enum": [
+                    "high",
+                    "main",
+                    "main10",
+                    "mp2lc",
+                    "mp4he",
+                    "p0",
+                    "p2"
+                ]
+            },
+            "AudioContainer": {
+                "description": "Audio container",
+                "type": "string",
+                "enum": [
+                    "audio/mpeg",
+                    "audio/mp4",
+                    "audio/ogg",
+                    "audio/wave",
+                    "audio/webm"
+                ]
+            },
+            "AudioFormatOptions": {
+                "description": "Options for checking audio playback support",
+                "type": "object",
+                "properties": {
+                    "atmos": {
+                        "description": "Whether Dolby Atmos support is being requested",
+                        "type": "boolean"
+                    },
+                    "codecLevel": {
+                        "description": "The level of the audio codec",
+                        "type": "string"
+                    },
+                    "codecProfile": {
+                        "description": "The profile of the audio codec",
+                        "$ref": "#/components/schemas/AudioCodecProfile"
+                    },
+                    "container": {
+                        "$ref": "#/components/schemas/AudioContainer"
+                    },
+                    "sampleRate": {
+                        "description": "The sample rate of the audio, in kHz",
+                        "type": "number"
+                    }
+                }
+            },
+            "HDRProfile": {
+                "type": "string",
+                "description": "HDR profile",
+                "enum": [
+                    "dolbyVision",
+                    "hdr10",
+                    "hdr10plus",
+                    "hlg",
+                    "sdr",
+                    "technicolor",
+                    "unknown"
+                ]
+            },
+            "VideoCodec": {
+                "type": "string",
+                "description": "Video codec",
+                "enum": [
+                    "av1",
+                    "avc",
+                    "hevc",
+                    "mpeg1",
+                    "mpeg2",
+                    "vp8",
+                    "vp9"
+                ]
+            },
+            "VideoContainer": {
+                "description": "Video container format",
+                "type": "string",
+                "enum": [
+                    "video/mpeg",
+                    "video/mp2t",
+                    "video/mp4",
+                    "video/webm"
+                ]
+            },
+            "VideoFormatOptions": {
+                "description": "Options for checking video playback support",
+                "type": "object",
+                "properties": {
+                    "atmos": {
+                        "description": "Whether Dolby Atmos support is being requested",
+                        "type": "boolean"
+                    },
+                    "codecLevel": {
+                        "description": "The level of the video codec",
+                        "type": "string",
+                        "enum": [
+                            "4.1",
+                            "4.2",
+                            "5.0",
+                            "5.1",
+                            "high",
+                            "main"
+                        ]
+                    },
+                    "codecProfile": {
+                        "description": "The profile of the video codec",
+                        "type": "string",
+                        "enum": [
+                            "high",
+                            "main",
+                            "main10",
+                            "p0",
+                            "p2"
+                        ]
+                    },
+                    "container": {
+                        "$ref": "#/components/schemas/VideoContainer"
+                    },
+                    "frameRate": {
+                        "description": "The frame rate of the video content",
+                        "type": "integer"
+                    },
+                    "hdr": {
+                        "$ref": "#/components/schemas/HDRProfile"
+                    },
+                    "resolution": {
+                        "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Dimensions"
+                    }
+                }
+            }
+        }
+    }
+}
