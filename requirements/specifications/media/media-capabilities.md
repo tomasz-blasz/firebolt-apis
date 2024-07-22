@@ -64,17 +64,16 @@ I want to show an audio/videophile overlay with detailed information:
     - [1.1.2. As a first-party App developer](#112-as-a-first-party-app-developer)
 - [2. Table of Contents](#2-table-of-contents)
 - [3. Constants, Types, and Schemas](#3-constants-types-and-schemas)
-  - [3.1. Media Container Types](#31-media-container-types)
-  - [3.2. Media Codecs](#32-media-codecs)
-  - [3.3. Dimensions](#33-dimensions)
-  - [3.4. Resolution User-Friendly Name](#34-resolution-user-friendly-name)
-  - [3.5. Video Modes](#35-video-modes)
-  - [3.6. HDR Profiles](#36-hdr-profiles)
-  - [3.7. Colorimetry](#37-colorimetry)
-  - [3.8. Color Depth](#38-color-depth)
-  - [3.9. Color Space \& Chroma Subsampling](#39-color-space--chroma-subsampling)
-  - [3.10. Audio Output Mode](#310-audio-output-mode)
-  - [3.11. Quantization Range](#311-quantization-range)
+  - [3.1. Media Codecs](#31-media-codecs)
+  - [3.2. Dimensions](#32-dimensions)
+  - [3.3. Resolution User-Friendly Name](#33-resolution-user-friendly-name)
+  - [3.4. Video Modes](#34-video-modes)
+  - [3.5. HDR Profiles](#35-hdr-profiles)
+  - [3.6. Colorimetry](#36-colorimetry)
+  - [3.7. Color Depth](#37-color-depth)
+  - [3.8. Color Space \& Chroma Subsampling](#38-color-space--chroma-subsampling)
+  - [3.9. Audio Output Mode](#39-audio-output-mode)
+  - [3.10. Quantization Range](#310-quantization-range)
 - [4. Media Capabilities](#4-media-capabilities)
   - [4.1. Supported Audio Modes](#41-supported-audio-modes)
   - [4.2. Supported Video Modes](#42-supported-video-modes)
@@ -106,28 +105,7 @@ I want to show an audio/videophile overlay with detailed information:
 
 ## 3. Constants, Types, and Schemas
 
-### 3.1. Media Container Types
-
-The Firebolt `Media` module **MUST** have an `AudioContainer` enumeration of the following media container content types:
-
-| Name         | Description                                                                                                                    |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `audio/mp4`  | [MP4 Audio](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#mpeg-4_mp4)                                  |
-| `audio/mpeg` | [Moving Picture Experts Group (MPEG1/MPEG2)](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#mpegmpeg-2) |
-| `audio/ogg`  | [OGG](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#ogg)                                               |
-| `audio/wave` | [Waveform Audio File Format](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#wave_wav)                   |
-| `audio/webm` | [Web Media](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#webm)                                        |
-
-The Firebolt `Media` module **MUST** have a `VideoContainer` enumeration of the following media container content types:
-
-| Name         | Description                                                                                                                    |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `video/mp2t` | [MPEG transport stream](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)              |
-| `video/mp4`  | [MP4 Audio](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/)                                                       |
-| `video/mpeg` | [Moving Picture Experts Group (MPEG1/MPEG2)](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#mpegmpeg-2) |
-| `video/webm` | [Web Media](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Containers#webm)                                        |
-
-### 3.2. Media Codecs
+### 3.1. Media Codecs
 
 The Firebolt `Media` module **MUST** have an `AudioCodec` enumeration:
 
@@ -155,7 +133,7 @@ The Firebolt `Media` module **MUST** have a `VideoCodec` enumeration:
 | `vp8`   | Video Processor 8                              |
 | `vp9`   | Video Processor 9                              |
 
-### 3.3. Dimensions
+### 3.2. Dimensions
 
 The Firebolt `Types` module must have a `Dimensions` object of the following schema:
 
@@ -164,7 +142,7 @@ The Firebolt `Types` module must have a `Dimensions` object of the following sch
 | `height` | `number` |
 | `width`  | `number` |
 
-### 3.4. Resolution User-Friendly Name
+### 3.3. Resolution User-Friendly Name
 
 The Firebolt `Media` module **MUST** have a `ResolutionName` enumeration:
 
@@ -176,7 +154,7 @@ The Firebolt `Media` module **MUST** have a `ResolutionName` enumeration:
 | `uhd`     | `2160` and higher      |
 | `unknown` | unknown or no display  |
 
-### 3.5. Video Modes
+### 3.4. Video Modes
 
 For the purposes of the Firebolt API, a `VideoMode` shall be defined as the shorthand vertical resolution and frame rate of video content.
 
@@ -206,7 +184,7 @@ The Firebolt `Media` module **MUST** have a `VideoMode` enumeration:
 
 Any methods relating to the video mode (such as a device's video output mode) **MUST** return `Media.VideoMode` values.
 
-### 3.6. HDR Profiles
+### 3.5. HDR Profiles
 
 The Firebolt `Media` module **MUST** have an `HDRProfile` enumeration:
 
@@ -218,7 +196,7 @@ The Firebolt `Media` module **MUST** have an `HDRProfile` enumeration:
 - `technicolor`
 - `unknown`
 
-### 3.7. Colorimetry
+### 3.6. Colorimetry
 
 The Firebolt `Media` module **MUST** have a `Colorimetry` enumeration:
 
@@ -235,7 +213,7 @@ The Firebolt `Media` module **MUST** have a `Colorimetry` enumeration:
 
 > TODO: Do we need to add `ICtCp`?  https://professional.dolby.com/siteassets/pdfs/ictcp_dolbywhitepaper_v071.pdf
 
-### 3.8. Color Depth
+### 3.7. Color Depth
 
 The Firebolt `Media` module **MUST** have a `ColorDepth` enumeration:
 
@@ -245,7 +223,7 @@ The Firebolt `Media` module **MUST** have a `ColorDepth` enumeration:
 - `auto`
 - `unknown`
 
-### 3.9. Color Space & Chroma Subsampling
+### 3.8. Color Space & Chroma Subsampling
 
 The Firebolt `Media` module **MUST** have a `ColorSpace` enumeration:
 
@@ -258,7 +236,7 @@ The Firebolt `Media` module **MUST** have a `ColorSpace` enumeration:
 | `other`    |        |
 | `unknown`  |        |
 
-### 3.10. Audio Output Mode
+### 3.9. Audio Output Mode
 
 The Firebolt `Media` module **MUST** have an `AudioMode` enumeration:
 
@@ -269,7 +247,7 @@ The Firebolt `Media` module **MUST** have an `AudioMode` enumeration:
 - `surround`
 - `unknown`
 
-### 3.11. Quantization Range
+### 3.10. Quantization Range
 
 The Firebolt `VideoOutput` module **MUST** have a `QuantizationRange` enumeration:
 
@@ -279,7 +257,7 @@ The Firebolt `VideoOutput` module **MUST** have a `QuantizationRange` enumeratio
 
 ## 4. Media Capabilities
 
-Apps need to know what types of media support the device and any connected peripherals are together capable of.
+Apps need to know what type of media the device and its connected peripherals are together capable of playing.
 
 To facilitate this, the `MediaCapabilities` module will provide convenience methods that encapsulate the media-playing capabilities of the device as well as any of its connected peripherals, including (but not limited to) displays, sound bars, and receivers.
 
