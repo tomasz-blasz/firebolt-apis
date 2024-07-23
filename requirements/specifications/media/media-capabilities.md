@@ -338,8 +338,6 @@ MediaCapabilities.colorDepth()
 
 The `MediaCapabilities` module **MUST** have an `hdrProfiles` method that returns an array of `Media.HDRProfile` values describing the HDR capabilities commonly supported across all relevant peripherals in the user's AV chain.
 
-If no display is present, an empty array **MUST** be returned.
-
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:media-capabilities:info` capability.
 
 ```javascript
@@ -497,8 +495,6 @@ These APIs will be surfaced in the `VideoOutput` module.
 
 The `VideoOutput` module **MUST** have a `mode` property that returns a `Media.VideoMode` value describing the currently set video output mode.
 
-If no display is present, a value of `unknown` is returned.
-
 This method **MUST** have a corresponding `onModeWillChange` event to notify listeners when a change to this property has been made but before that change has taken effect.
 
 This method **MUST** have a corresponding `onModeChanged` event to notify listeners after a change to this property has been made and that change has taken effect.
@@ -513,8 +509,6 @@ VideoOutput.mode()
 ### 7.2. Resolution
 
 The `VideoOutput` module **MUST** have a `resolution` method that returns a `Types.Dimensions` object describing the current video output resolution, in pixels.
-
-If no display is present, the height and width values **MUST** both be zero.
 
 This method **MUST** have a corresponding `onResolutionChanged` event to notify listeners after a change to the device's `videoMode` property has been made and that change has taken effect.
 

@@ -238,7 +238,7 @@
         },
         {
             "name": "mode",
-            "summary": "The current video output mode of the device.",
+            "summary": "The current video output mode setting of the device.",
             "tags": [
                 {
                     "name": "property:readonly"
@@ -304,7 +304,7 @@
         },
         {
             "name": "resolution",
-            "summary": "The width and height of the current video output, in pixels.",
+            "summary": "The width and height of the current video mode setting, in pixels.",
             "tags": [
                 {
                     "name": "property:readonly"

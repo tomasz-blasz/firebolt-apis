@@ -147,8 +147,8 @@
             ],
             "params": [],
             "result": {
-                "name": "refreshRate",
-                "summary": "The refresh rate of the display device.",
+                "name": "nativeRefreshRate",
+                "summary": "The native refresh rate of the display device.",
                 "schema": {
                     "type": "number"
                 }
