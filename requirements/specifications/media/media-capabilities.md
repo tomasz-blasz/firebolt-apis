@@ -1,6 +1,6 @@
 # Media Capabilities Requirements
 
-Document Status: Candidate Specification
+Document Status: Proposed Specification
 
 See [Firebolt Requirements Governance](../../governance.md) for more info.
 
@@ -200,18 +200,21 @@ The Firebolt `Media` module **MUST** have an `HDRProfile` enumeration:
 
 The Firebolt `Media` module **MUST** have a `Colorimetry` enumeration:
 
-- `BT2020cYCC`
-- `BT2020RGB`
-- `BT2020YCC`
-- `DCI-P3`
-- `opRGB`
-- `opYCC601`
-- `sYCC601`
-- `xvYCC601`
-- `xvYCC709`
-- `unknown`
-
-> TODO: Do we need to add `ICtCp`?  https://professional.dolby.com/siteassets/pdfs/ictcp_dolbywhitepaper_v071.pdf
+| Value         | Description                                           |
+| ------------- | ----------------------------------------------------- |
+| `BT2020cYCC`  | Rec. ITU-R BT.2020 Y’cC’BCC’RC                        |
+| `BT2020RGB`   | Rec. ITU-R BT.2020 R’G’B’                             |
+| `BT2020YCC`   | Rec. ITU-R BT.2020 Y’C’BC’R                           |
+| `defaultRGB`  | Default chromaticity information of the display       |
+| `ICtCp`       | Rec. ITU-R BT.2100                                    |
+| `opRGB`       | IEC 61966-2-5; previously named `AdobeRGB`            |
+| `opYCC601`    | IEC 61966-2-5 Annex A; previously named `AdobeYCC601` |
+| `sRGB`        | IEC 61966-2-1                                         |
+| `ST2113RGB24` | SMPTE ST 2113 R’G’B’; previously named `DCI-P3`       |
+| `sYCC601`     | IEC 61966-2-1/Amendment 1                             |
+| `xvYCC601`    | Standard Definition; based on IEC 61966-2-4           |
+| `xvYCC709`    | High Definition; based on IEC 61966-2-4               |
+| `unknown`     | Reserved for edge cases (no display, etc.)            |
 
 ### 3.7. Color Depth
 
@@ -261,8 +264,6 @@ Apps need to know what type of media the device and its connected peripherals ar
 
 To facilitate this, the `MediaCapabilities` module will provide convenience methods that encapsulate the media-playing capabilities of the device as well as any of its connected peripherals, including (but not limited to) displays, sound bars, and receivers.
 
-These values **MUST NOT** change without a settings change, peripheral change, or firmware update.
-
 ### 4.1. Supported Audio Modes
 
 The `MediaCapabilities` module **MUST** have an `audioModes` method that returns an array of `Media.AudioMode` values describing the audio modes commonly supported across all relevant peripherals in the user's AV chain.
@@ -287,7 +288,15 @@ MediaCapabilities.videoModes()
 
 ### 4.3. Supported Audio Codecs
 
-The `MediaCapabilities` module **MUST** have an `audioCodecs` method that returns an array of `Media.AudioCodec` values describing the audio codecs commonly supported across all relevant peripherals in the user's AV chain.
+The `MediaCapabilities` module **MUST** have an `audioCodecs` method that returns an array of `Media.AudioCodec` values describing the audio codecs supported by the current audio decoding device.
+
+This method's response is dictated by the currently selected audio output mode and the device responsible for decoding the audio stream.
+
+If the device is currently in `passthrough` audio mode, audio codecs supported by the audio sink **MUST** be returned.
+
+If the device is not in `passthrough` audio mode, audio codecs supported by the device **MUST** be returned.
+
+This method **MUST** have a corresponding `onAudioCodecsChanged` event to notify listeners when the available audio codecs have changed.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:media-capabilities:info` capability.
 
@@ -305,7 +314,7 @@ MediaCapabilities.audioCodecs()
 
 ### 4.4. Supported Video Codecs
 
-The `MediaCapabilities` module **MUST** have an `videoCodecs` method that returns an array of `Media.VideoCodec` values describing the video codecs commonly supported across all relevant peripherals in the user's AV chain.
+The `MediaCapabilities` module **MUST** have an `videoCodecs` method that returns an array of `Media.VideoCodec` values describing the video codecs supported by the device.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:media-capabilities:info` capability.
 
@@ -366,7 +375,7 @@ These will be surfaced in the `Display` module.
 
 The `Display` module **MUST** have an `hdrProfiles` method that returns an array of `Media.HDRProfile` values describing the display's supported HDR profiles.
 
-If no display is present, an empty array **MUST** be returned.
+If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
@@ -379,7 +388,7 @@ Display.hdrProfiles()
 
 The `Display` module **MUST** have a `colorDepth` method that returns a numeric value describing the display's supported color depth.
 
-If no display is present, a value of `0` **MUST** be returned.
+If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
@@ -392,7 +401,7 @@ Display.colorDepth()
 
 The `Display` module **MUST** have a `size` method that returns a `Types.Dimensions` object describing the physical width and height of the display, in centimeters.
 
-If no display is present, the height and width values **MUST** both be zero.
+If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
@@ -405,7 +414,7 @@ Display.size()
 
 The `Display` module **MUST** have an `nativeResolution` method that returns a `Types.Dimensions` object describing the `width` and `height` of the display's native resolution as numbers, in pixels.
 
-If no display is present, the height and width values **MUST** both be zero.
+If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
@@ -418,7 +427,7 @@ Display.nativeResolution()
 
 The `Display` module **MUST** have a `nativeResolutionName` method that returns a `Media.ResolutionName` value describing the user-friendly name of the display's native resolution.
 
-If no display is present, a value of `unknown` **MUST** be returned.
+If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
@@ -431,7 +440,7 @@ Display.nativeResolutionName()
 
 The `Display` module **MUST** have a `nativeRefreshRate` method that returns an number value describing the native refresh rate of the display (in Hz).
 
-If no display is present, a value of zero **MUST** be returned.
+If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
@@ -444,7 +453,7 @@ Display.nativeRefreshRate()
 
 The `Display` module **MUST** have a `colorimetry` method that returns an array of `Media.Colorimetry` values describing the display's supported colorimetry values.
 
-If no display is present, an empty array **MUST** be returned.
+If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
@@ -457,7 +466,7 @@ Display.colorimetry()
 
 The `Display` module **MUST** have a `videoModes` method that returns an array of `Media.VideoMode` values describing the video modes supported by the display.
 
-If no display is present, an empty array **MUST** be returned.
+If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
@@ -586,27 +595,31 @@ The `VideoOutput` module **MUST** have a `currentSettings` method that returns a
 
 This method **MUST** return the following properties:
 
-| Property      | Type                |
-| ------------- | ------------------- |
-| `colorDepth`  | `Media.ColorDepth`  |
-| `colorimetry` | `Media.Colorimetry` |
-| `colorSpace`  | `Media.ColorSpace`  |
-| `hdrProfile`  | `Media.HDRProfile`  |
-| `mode`        | `Media.VideoMode`   |
-| `resolution`  | `Types.Dimensions`  |
+| Property            | Type                            |
+| ------------------- | ------------------------------- |
+| `colorDepth`        | `Media.ColorDepth`              |
+| `colorimetry`       | `Media.Colorimetry`             |
+| `colorSpace`        | `Media.ColorSpace`              |
+| `frameRate`         | `number`                        |
+| `hdrProfile`        | `Media.HDRProfile`              |
+| `mode`              | `Media.VideoMode`               |
+| `quantizationRange` | `VideoOutput.QuantizationRange` |
+| `resolution`        | `Types.Dimensions`              |
 
 Access to this method **MUST** be governed by the `xrn:firebolt:capability:video-output:info` capability.
 
 This method **MUST** have a corresponding `onCurrentSettingsChanged` event to notify listeners after any of the specified output properties have changed and that those changes have taken effect.
 
 ```javascript
-Video.currentSettings()
+VideoOutput.currentSettings()
 //> {
 //>   "colorDepth": "10",
 //>   "colorimetry": "BT2020YCC",
 //>   "colorSpace": "YCbCr422",
+//>   "frameRate": 60,
 //>   "hdrProfile": "hdr10plus",
 //>   "mode": "1080p60",
+//>   "quantizationRange": "limited",
 //>   "resolution": { "width": 1920, "height": 1080 }
 //> }
 ```

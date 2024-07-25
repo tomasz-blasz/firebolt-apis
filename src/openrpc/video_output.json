@@ -132,11 +132,17 @@
                         "colorSpace": {
                             "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/ColorSpace"
                         },
+                        "frameRate": {
+                            "type": "number"
+                        },
                         "hdrProfile": {
                             "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
                         },
                         "mode": {
                             "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoMode"
+                        },
+                        "quantizationRange": {
+                            "$ref": "#/components/schemas/QuantizationRange"
                         },
                         "resolution": {
                             "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Dimensions"
@@ -146,8 +152,10 @@
                         "colorDepth",
                         "colorimetry",
                         "colorSpace",
+                        "frameRate",
                         "hdrProfile",
                         "mode",
+                        "quantizationRange",
                         "resolution"
                     ]
                 }
@@ -162,8 +170,10 @@
                             "colorDepth": "10",
                             "colorimetry": "BT2020YCC",
                             "colorSpace": "YCbCr422",
+                            "frameRate": 60,
                             "hdrProfile": "hdr10plus",
                             "mode": "1080p60",
+                            "quantizationRange": "limited",
                             "resolution": {
                                 "width": 1920,
                                 "height": 1080

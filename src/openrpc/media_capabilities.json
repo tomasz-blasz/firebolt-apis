@@ -8,8 +8,11 @@
     "methods": [
         {
             "name": "audioCodecs",
-            "summary": "The audio codecs commonly supported by the device and all its connected audio peripherals.",
+            "summary": "The audio codecs supported by the audio output sink.  The response is based on the current audio output mode.  If the output mode is passthrough, the codecs of the audio sink (such as the soundbar or AV receiver) are returned.  Otherwise, the supported audio codecs of the device are returned.",
             "tags": [
+                {
+                    "name": "property:readonly"
+                },
                 {
                     "name": "capabilities",
                     "x-uses": [
@@ -48,7 +51,7 @@
         },
         {
             "name": "videoCodecs",
-            "summary": "The video codecs commonly supported by the device and all of its connected video peripherals.",
+            "summary": "The video codecs supported by the device.",
             "tags": [
                 {
                     "name": "capabilities",
