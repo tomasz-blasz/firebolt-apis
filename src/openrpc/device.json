@@ -570,14 +570,13 @@
         },
         {
           "name": "deprecated",
-          "x-since": "1.2.0",
-          "x-alternative": "Video.resolution()"
+          "x-since": "1.2.0"
         }
       ],
       "params": [],
       "result": {
         "name": "screenResolution",
-        "summary": "The resolution",
+        "summary": "The application's grpahical/virtual resolution",
         "schema": {
           "$ref": "#/components/schemas/Resolution"
         }
@@ -612,13 +611,13 @@
         {
           "name": "deprecated",
           "x-since": "1.2.0",
-          "x-alternative": "Video.resolution()"
+          "x-alternative": "MediaCapabilities.videoModes()"
         }
       ],
       "params": [],
       "result": {
         "name": "videoResolution",
-        "summary": "The video output resolution",
+        "summary": "The maximum supported video resolution",
         "schema": {
           "$ref": "#/components/schemas/Resolution"
         }
@@ -630,8 +629,8 @@
           "result": {
             "name": "Default Result",
             "value": [
-              1920,
-              1080
+              3840,
+              2160
             ]
           }
         }
