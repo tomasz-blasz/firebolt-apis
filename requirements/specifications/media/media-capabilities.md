@@ -179,6 +179,7 @@ The Firebolt `Media` module **MUST** have a `VideoMode` enumeration:
 - `2160p30`
 - `2160p50`
 - `2160p60`
+- `4320p50`
 - `4320p60`
 - `unknown`
 
