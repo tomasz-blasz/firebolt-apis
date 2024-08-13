@@ -146,13 +146,15 @@ The Firebolt `Types` module must have a `Dimensions` object of the following sch
 
 The Firebolt `Media` module **MUST** have a `ResolutionName` enumeration:
 
-| Class     | Applicable Resolutions |
-| --------- | ---------------------- |
-| `sd`      | `576p` and lower       |
-| `hd`      | `720p`                 |
-| `fhd`     | `1080p`                |
-| `uhd`     | `2160` and higher      |
-| `unknown` | unknown or no display  |
+| Class     | Applicable Vertical Resolutions  |
+| --------- | -------------------------------- |
+| `sd`      | `576`                            |
+| `hd`      | `720`                            |
+| `fhd`     | `1080`                           |
+| `4k-uhd`  | `2160`                           |
+| `8k-uhd`  | `4320`                           |
+| `other`   | other or non-standard resolution |
+| `unknown` | unknown resolution / no display  |
 
 ### 3.4. Video Modes
 
@@ -181,6 +183,7 @@ The Firebolt `Media` module **MUST** have a `VideoMode` enumeration:
 - `2160p60`
 - `4320p50`
 - `4320p60`
+- `other`
 - `unknown`
 
 Any methods relating to the video mode (such as a device's video output mode) **MUST** return `Media.VideoMode` values.

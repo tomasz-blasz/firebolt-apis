@@ -92,7 +92,9 @@
                 "sd",
                 "hd",
                 "fhd",
-                "uhd",
+                "4k-uhd",
+                "8k-uhd",
+                "other",
                 "unknown"
             ]
         },
@@ -135,6 +137,7 @@
                 "2160p60",
                 "4320p50",
                 "4320p60",
+                "other",
                 "unknown"
             ]
         }
