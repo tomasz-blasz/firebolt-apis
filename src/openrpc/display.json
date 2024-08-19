@@ -85,8 +85,8 @@
             ]
         },
         {
-            "name": "hdrProfiles",
-            "summary": "The display's supported HDR profiles.",
+            "name": "hdrFormats",
+            "summary": "The display's supported HDR formats.",
             "tags": [
                 {
                     "name": "capabilities",
@@ -97,12 +97,12 @@
             ],
             "params": [],
             "result": {
-                "name": "hdrProfiles",
-                "summary": "An array of all HDR profiles supported by the display.",
+                "name": "hdrFormats",
+                "summary": "An array of all HDR formats supported by the display.",
                 "schema": {
                     "type": "array",
                     "items": {
-                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRFormat"
                     }
                 }
             },
@@ -124,6 +124,14 @@
                             "hdr10plus",
                             "hlg"
                         ]
+                    }
+                },
+                {
+                    "name": "Non-HDR (SDR) Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": []
                     }
                 }
             ]

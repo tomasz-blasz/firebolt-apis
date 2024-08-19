@@ -196,8 +196,8 @@
             ]
         },
         {
-            "name": "hdrProfiles",
-            "summary": "The HDR profiles commonly supported by the device and its connected video peripherals.",
+            "name": "hdrFormats",
+            "summary": "The HDR formats commonly supported by the device and its connected video peripherals.",
             "tags": [
                 {
                     "name": "capabilities",
@@ -208,12 +208,12 @@
             ],
             "params": [],
             "result": {
-                "name": "hdrProfiles",
-                "summary": "The supported HDR profiles",
+                "name": "hdrFormats",
+                "summary": "The supported HDR formats",
                 "schema": {
                     "type": "array",
                     "items": {
-                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
+                        "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRFormat"
                     }
                 }
             },
@@ -228,6 +228,14 @@
                             "hdr10plus",
                             "hlg"
                         ]
+                    }
+                },
+                {
+                    "name": "Device connected to an SDR (non-HDR) display",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": []
                     }
                 }
             ]

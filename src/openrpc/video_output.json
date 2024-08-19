@@ -103,8 +103,8 @@
             ]
         },
         {
-            "name": "currentSettings",
-            "summary": "A convenience method that returns various properties currently set on the device related to video output.",
+            "name": "properties",
+            "summary": "A convenience method that returns various properties currently used for video output.",
             "tags": [
                 {
                     "name": "property:readonly"
@@ -112,13 +112,13 @@
                 {
                     "name": "capabilities",
                     "x-uses": [
-                        "xrn:firebolt:capability:video-output:info"
+                        "xrn:firebolt:capability:video-output:properties"
                     ]
                 }
             ],
             "params": [],
             "result": {
-                "name": "currentSettings",
+                "name": "properties",
                 "summary": "Current video output properties",
                 "schema": {
                     "type": "object",
@@ -135,8 +135,16 @@
                         "frameRate": {
                             "type": "number"
                         },
-                        "hdrProfile": {
-                            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
+                        "hdrFormat": {
+                            "anyOf": [
+                                {
+                                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRFormat"
+                                },
+                                {
+                                    "type": "string",
+                                    "const": "none"
+                                }
+                            ]
                         },
                         "mode": {
                             "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/VideoMode"
@@ -153,7 +161,7 @@
                         "colorimetry",
                         "colorSpace",
                         "frameRate",
-                        "hdrProfile",
+                        "hdrFormat",
                         "mode",
                         "quantizationRange",
                         "resolution"
@@ -171,7 +179,7 @@
                             "colorimetry": "BT2020YCC",
                             "colorSpace": "YCbCr422",
                             "frameRate": 60,
-                            "hdrProfile": "hdr10plus",
+                            "hdrFormat": "hdro10plus",
                             "mode": "1080p60",
                             "quantizationRange": "limited",
                             "resolution": {
@@ -184,8 +192,8 @@
             ]
         },
         {
-            "name": "hdrProfile",
-            "summary": "The HDR profile set for video output.",
+            "name": "hdrFormat",
+            "summary": "The HDR format currently used for video output. Returns 'none' if the video output is not HDR.",
             "tags": [
                 {
                     "name": "property:readonly"
@@ -193,28 +201,44 @@
                 {
                     "name": "capabilities",
                     "x-uses": [
-                        "xrn:firebolt:capability:video-output:hdrprofile"
+                        "xrn:firebolt:capability:video-output:hdrformat"
                     ]
                 }
             ],
             "params": [],
             "result": {
-                "name": "hdrProfile",
-                "summary": "The HDR profile",
+                "name": "hdrFormat",
+                "summary": "The HDR format",
                 "schema": {
-                    "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRProfile"
-                }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [],
-                    "result": {
-                        "name": "Default Result",
-                        "value": "hdr10plus"
+                    "anyOf": [
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/schemas/media#/definitions/HDRFormat"
+                        },
+                        {
+                            "type": "string",
+                            "const": "none"
+                        }
+                    ]
+                },
+                "examples": [
+                    {
+                        "name": "Default Example",
+                        "params": [],
+                        "result": {
+                            "name": "Default Result",
+                            "value": "hdr10plus"
+                        }
+                    },
+                    {
+                        "name": "Non-HDR (SDR) Example",
+                        "params": [],
+                        "result": {
+                            "name": "Default Result",
+                            "value": "none"
+                        }
                     }
-                }
-            ]
+                ]
+            }
         },
         {
             "name": "quantizationRange",

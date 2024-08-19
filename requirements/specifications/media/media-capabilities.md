@@ -68,7 +68,7 @@ I want to show an audio/videophile overlay with detailed information:
   - [3.2. Dimensions](#32-dimensions)
   - [3.3. Resolution User-Friendly Name](#33-resolution-user-friendly-name)
   - [3.4. Video Modes](#34-video-modes)
-  - [3.5. HDR Profiles](#35-hdr-profiles)
+  - [3.5. HDR Formats](#35-hdr-formats)
   - [3.6. Colorimetry](#36-colorimetry)
   - [3.7. Color Depth](#37-color-depth)
   - [3.8. Color Space \& Chroma Subsampling](#38-color-space--chroma-subsampling)
@@ -80,10 +80,10 @@ I want to show an audio/videophile overlay with detailed information:
   - [4.3. Supported Audio Codecs](#43-supported-audio-codecs)
   - [4.4. Supported Video Codecs](#44-supported-video-codecs)
   - [4.5. Color Depth](#45-color-depth)
-  - [4.6. HDR Profiles](#46-hdr-profiles)
+  - [4.6. HDR Formats](#46-hdr-formats)
   - [4.7. Atmos Supported](#47-atmos-supported)
 - [5. Display Support](#5-display-support)
-  - [5.1. HDR Profiles](#51-hdr-profiles)
+  - [5.1. HDR Formats](#51-hdr-formats)
   - [5.2. Color Depth](#52-color-depth)
   - [5.3. Display Size](#53-display-size)
   - [5.4. Native Resolution](#54-native-resolution)
@@ -96,12 +96,12 @@ I want to show an audio/videophile overlay with detailed information:
 - [7. Video Output](#7-video-output)
   - [7.1. Mode](#71-mode)
   - [7.2. Resolution](#72-resolution)
-  - [7.3. HDR Profile](#73-hdr-profile)
+  - [7.3. HDR Format](#73-hdr-format)
   - [7.4. Color Depth](#74-color-depth)
   - [7.5. Colorimetry](#75-colorimetry)
   - [7.6. Color Space \& Chroma Subsampling](#76-color-space--chroma-subsampling)
   - [7.7. Quantization Range](#77-quantization-range)
-  - [7.8. Current Output Settings](#78-current-output-settings)
+  - [7.8. Current Output Properties](#78-current-output-properties)
 
 ## 3. Constants, Types, and Schemas
 
@@ -188,15 +188,14 @@ The Firebolt `Media` module **MUST** have a `VideoMode` enumeration:
 
 Any methods relating to the video mode (such as a device's video output mode) **MUST** return `Media.VideoMode` values.
 
-### 3.5. HDR Profiles
+### 3.5. HDR Formats
 
-The Firebolt `Media` module **MUST** have an `HDRProfile` enumeration:
+The Firebolt `Media` module **MUST** have an `HDRFormat` enumeration:
 
 - `dolbyVision`
 - `hdr10`
 - `hdr10plus`
 - `hlg`
-- `sdr`
 - `technicolor`
 - `unknown`
 
@@ -347,14 +346,14 @@ MediaCapabilities.colorDepth()
 //> 10
 ```
 
-### 4.6. HDR Profiles
+### 4.6. HDR Formats
 
-The `MediaCapabilities` module **MUST** have an `hdrProfiles` method that returns an array of `Media.HDRProfile` values describing the HDR capabilities commonly supported across all relevant peripherals in the user's AV chain.
+The `MediaCapabilities` module **MUST** have an `hdrFormats` method that returns an array of `Media.HDRFormat` values describing the HDR capabilities commonly supported across all relevant peripherals in the user's AV chain.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:media-capabilities:info` capability.
 
 ```javascript
-MediaCapabilities.hdrProfiles()
+MediaCapabilities.hdrFormats()
 //> ["dolbyVision", "hdr10", "hdr10plus", "hlg"]
 ```
 
@@ -375,16 +374,16 @@ Apps need to know various aspects of the current (or built-in) video output prop
 
 These will be surfaced in the `Display` module.
 
-### 5.1. HDR Profiles
+### 5.1. HDR Formats
 
-The `Display` module **MUST** have an `hdrProfiles` method that returns an array of `Media.HDRProfile` values describing the display's supported HDR profiles.
+The `Display` module **MUST** have an `hdrFormats` method that returns an array of `Media.HDRFormat` values describing the display's supported HDR formats.
 
 If no display is present, a JSON-RPC error response of `{"code": -40400, "message": "No display connected"}` **MUST** be returned.
 
 Access to this method **MUST** require the `use` role of the `xrn:firebolt:capability:display:info` capability.
 
 ```javascript
-Display.hdrProfiles()
+Display.hdrFormats()
 //> ["dolbyVision", "hdr10", "hdr10plus", "hlg"]
 ```
 
@@ -532,16 +531,17 @@ VideoOutput.resolution()
 //> { "width": 1920, "height": 1080 }
 ```
 
-### 7.3. HDR Profile
+### 7.3. HDR Format
 
-The `VideoOutput` module **MUST** have an `hdrProfile` method that returns a `Media.HDRProfile` value describing the HDR profile currently set for video output.
+The `VideoOutput` module **MUST** have an `hdrFormat` method that returns a `Media.HDRFormat` value describing the HDR format currently set for video output.
 
-This method **MUST** have a corresponding `onHdrProfileChanged` event to notify listeners after this property has changed and that change has taken effect.
+If no HDR format is used (only SDR )
+This method **MUST** have a corresponding `onHdrFormatChanged` event to notify listeners after this property has changed and that change has taken effect.
 
-Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:video-output:hdrprofile` capability.
+Access to these methods **MUST** require the `use` role of the `xrn:firebolt:capability:video-output:hdrformat` capability.
 
 ```javascript
-VideoOutput.hdrProfile()
+VideoOutput.hdrFormat()
 //> "hdr10plus"
 ```
 
@@ -593,9 +593,9 @@ VideoOutput.quantizationRange()
 //> "limited"
 ```
 
-### 7.8. Current Output Settings
+### 7.8. Current Output Properties
 
-The `VideoOutput` module **MUST** have a `currentSettings` method that returns an object describing various properties currently used for video output.
+The `VideoOutput` module **MUST** have a `properties` method that returns an object describing various properties currently used for video output.
 
 This method **MUST** return the following properties:
 
@@ -605,23 +605,23 @@ This method **MUST** return the following properties:
 | `colorimetry`       | `Media.Colorimetry`             |
 | `colorSpace`        | `Media.ColorSpace`              |
 | `frameRate`         | `number`                        |
-| `hdrProfile`        | `Media.HDRProfile`              |
+| `hdrFormat`         | `Media.HDRFormat`               |
 | `mode`              | `Media.VideoMode`               |
 | `quantizationRange` | `VideoOutput.QuantizationRange` |
 | `resolution`        | `Types.Dimensions`              |
 
 Access to this method **MUST** be governed by the `xrn:firebolt:capability:video-output:info` capability.
 
-This method **MUST** have a corresponding `onCurrentSettingsChanged` event to notify listeners after any of the specified output properties have changed and that those changes have taken effect.
+This method **MUST** have a corresponding `onPropertiesChanged` event to notify listeners after any of the specified output properties have changed and that those changes have taken effect.
 
 ```javascript
-VideoOutput.currentSettings()
+VideoOutput.properties()
 //> {
 //>   "colorDepth": "10",
 //>   "colorimetry": "BT2020YCC",
 //>   "colorSpace": "YCbCr422",
 //>   "frameRate": 60,
-//>   "hdrProfile": "hdr10plus",
+//>   "hdrFormat": "hdr10plus",
 //>   "mode": "1080p60",
 //>   "quantizationRange": "limited",
 //>   "resolution": { "width": 1920, "height": 1080 }

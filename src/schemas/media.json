@@ -72,15 +72,14 @@
                 "unknown"
             ]
         },
-        "HDRProfile": {
+        "HDRFormat": {
             "type": "string",
-            "description": "HDR profile",
+            "description": "HDR format",
             "enum": [
                 "dolbyVision",
                 "hdr10",
                 "hdr10plus",
                 "hlg",
-                "sdr",
                 "technicolor",
                 "unknown"
             ]

@@ -162,8 +162,8 @@
                 "xrn:firebolt:capability:video-output:colordepth",
                 "xrn:firebolt:capability:video-output:colorimetry",
                 "xrn:firebolt:capability:video-output:colorspace",
-                "xrn:firebolt:capability:video-output:hdrprofile",
-                "xrn:firebolt:capability:video-output:info",
+                "xrn:firebolt:capability:video-output:hdrformat",
+                "xrn:firebolt:capability:video-output:properties",
                 "xrn:firebolt:capability:video-output:mode",
                 "xrn:firebolt:capability:video-output:quantization"
             ]

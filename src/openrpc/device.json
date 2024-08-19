@@ -476,7 +476,7 @@
     },
     {
       "name": "hdr",
-      "summary": "Returns an array of valid HDR profiles that the device supports",
+      "summary": "Returns an array of valid HDR formats that the device supports",
       "tags": [
         {
           "name": "property:readonly"
@@ -490,13 +490,13 @@
         {
           "name": "deprecated",
           "x-since": "1.2.0",
-          "x-alternative": "MediaCapabilies.hdrProfiles()"
+          "x-alternative": "MediaCapabilies.hdrFormats()"
         }
       ],
       "params": [],
       "result": {
         "name": "hdr",
-        "summary": "The supported HDR profiles",
+        "summary": "The supported HDR formats",
         "schema": {
           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/BooleanMap"
         }
@@ -557,7 +557,7 @@
     },
     {
       "name": "screenResolution",
-      "summary": "The width and height of the current screen resolution.",
+      "summary": "The resolution of the current application's graphical/virtual surface, in pixels.",
       "tags": [
         {
           "name": "property:readonly"
@@ -597,7 +597,7 @@
     },
     {
       "name": "videoResolution",
-      "summary": "The width and height of the current video output resolution",
+      "summary": "The maximum video resolution supported by the currently connected display and device, in pixels.",
       "tags": [
         {
           "name": "property:readonly"
@@ -804,18 +804,29 @@
         ]
       },
       "Resolution": {
-        "type": "array",
-        "items": [
-          {
-            "type": "integer"
-          },
-          {
-            "type": "integer"
-          }
-        ],
-        "additionalItems": false,
-        "minItems": 2,
-        "maxItems": 2
+        "description": "The supported resolutions",
+        "enum": [
+          [
+            720,
+            480
+          ],
+          [
+            720,
+            576
+          ],
+          [
+            1280,
+            720
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            3840,
+            2160
+          ]
+        ]
       }
     }
   }
