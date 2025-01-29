@@ -16,7 +16,9 @@
         },
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:policy"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:policy"
+          ]
         }
       ],
       "result": {
@@ -62,14 +64,17 @@
           "name": "correlationId",
           "required": true,
           "schema": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         {
           "name": "result",
           "required": true,
           "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/EntityInfoResult"
+            "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/EntityInfoResult"
           },
           "summary": "The entityInfo data."
         }
@@ -122,12 +127,24 @@
                       "entitledExpires": "2025-01-01T00:00:00.000Z",
                       "offeringType": "buy",
                       "price": 2.99,
-                      "videoQuality": ["UHD"],
-                      "audioProfile": ["dolbyAtmos"],
-                      "audioLanguages": ["en"],
-                      "closedCaptions": ["en"],
-                      "subtitles": ["es"],
-                      "audioDescriptions": ["en"]
+                      "videoQuality": [
+                        "UHD"
+                      ],
+                      "audioProfile": [
+                        "dolbyAtmos"
+                      ],
+                      "audioLanguages": [
+                        "en"
+                      ],
+                      "closedCaptions": [
+                        "en"
+                      ],
+                      "subtitles": [
+                        "es"
+                      ],
+                      "audioDescriptions": [
+                        "en"
+                      ]
                     }
                   ]
                 }
@@ -179,12 +196,24 @@
                       "entitledExpires": "2025-01-01T00:00:00.000Z",
                       "offeringType": "buy",
                       "price": 2.99,
-                      "videoQuality": ["UHD"],
-                      "audioProfile": ["dolbyAtmos"],
-                      "audioLanguages": ["en"],
-                      "closedCaptions": ["en"],
-                      "subtitles": ["es"],
-                      "audioDescriptions": ["en"]
+                      "videoQuality": [
+                        "UHD"
+                      ],
+                      "audioProfile": [
+                        "dolbyAtmos"
+                      ],
+                      "audioLanguages": [
+                        "en"
+                      ],
+                      "closedCaptions": [
+                        "en"
+                      ],
+                      "subtitles": [
+                        "es"
+                      ],
+                      "audioDescriptions": [
+                        "en"
+                      ]
                     }
                   ]
                 },
@@ -203,10 +232,18 @@
                           "entityId": "345"
                         },
                         "entitled": true,
-                        "videoQuality": ["HD"],
-                        "audioProfile": ["dolbyAtmos"],
-                        "audioLanguages": ["en"],
-                        "closedCaptions": ["en"]
+                        "videoQuality": [
+                          "HD"
+                        ],
+                        "audioProfile": [
+                          "dolbyAtmos"
+                        ],
+                        "audioLanguages": [
+                          "en"
+                        ],
+                        "closedCaptions": [
+                          "en"
+                        ]
                       }
                     ]
                   }
@@ -271,10 +308,18 @@
                         },
                         "entitled": true,
                         "offeringType": "free",
-                        "videoQuality": ["SD"],
-                        "audioProfile": ["stereo"],
-                        "audioLanguages": ["en"],
-                        "closedCaptions": ["en"]
+                        "videoQuality": [
+                          "SD"
+                        ],
+                        "audioProfile": [
+                          "stereo"
+                        ],
+                        "audioLanguages": [
+                          "en"
+                        ],
+                        "closedCaptions": [
+                          "en"
+                        ]
                       }
                     ]
                   },
@@ -305,10 +350,18 @@
                         },
                         "entitled": true,
                         "offeringType": "free",
-                        "videoQuality": ["SD"],
-                        "audioProfile": ["stereo"],
-                        "audioLanguages": ["en"],
-                        "closedCaptions": ["en"]
+                        "videoQuality": [
+                          "SD"
+                        ],
+                        "audioProfile": [
+                          "stereo"
+                        ],
+                        "audioLanguages": [
+                          "en"
+                        ],
+                        "closedCaptions": [
+                          "en"
+                        ]
                       }
                     ]
                   },
@@ -339,10 +392,18 @@
                         },
                         "entitled": true,
                         "offeringType": "free",
-                        "videoQuality": ["SD"],
-                        "audioProfile": ["stereo"],
-                        "audioLanguages": ["en"],
-                        "closedCaptions": ["en"]
+                        "videoQuality": [
+                          "SD"
+                        ],
+                        "audioProfile": [
+                          "stereo"
+                        ],
+                        "audioLanguages": [
+                          "en"
+                        ],
+                        "closedCaptions": [
+                          "en"
+                        ]
                       }
                     ]
                   }
@@ -351,7 +412,7 @@
             }
           ],
           "result": {
-            "name": "success",
+            "name": "result",
             "value": true
           }
         }
@@ -377,16 +438,19 @@
           "name": "correlationId",
           "required": true,
           "schema": {
-            "type": ["string", "null"]
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         {
           "name": "result",
           "required": true,
           "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/PurchasedContentResult"
+            "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/PurchasedContentResult"
           },
-          "summary": "The data for the purachasedContent"
+          "summary": "The data for the purchasedContent"
         }
       ],
       "result": {
@@ -439,12 +503,24 @@
                         "entitledExpires": "2025-01-01T00:00:00.000Z",
                         "offeringType": "buy",
                         "price": 2.99,
-                        "videoQuality": ["UHD"],
-                        "audioProfile": ["dolbyAtmos"],
-                        "audioLanguages": ["en"],
-                        "closedCaptions": ["en"],
-                        "subtitles": ["es"],
-                        "audioDescriptions": ["en"]
+                        "videoQuality": [
+                          "UHD"
+                        ],
+                        "audioProfile": [
+                          "dolbyAtmos"
+                        ],
+                        "audioLanguages": [
+                          "en"
+                        ],
+                        "closedCaptions": [
+                          "en"
+                        ],
+                        "subtitles": [
+                          "es"
+                        ],
+                        "audioDescriptions": [
+                          "en"
+                        ]
                       }
                     ]
                   }
@@ -469,7 +545,9 @@
         },
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:watched"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:watched"
+          ]
         }
       ],
       "params": [
@@ -483,7 +561,7 @@
         },
         {
           "name": "progress",
-          "summary": "How much of the content has been watched (percentage as 0-1 for VOD, number of seconds for live)",
+          "summary": "How much of the content has been watched (percentage as (0-0.999) for VOD, number of seconds for live)",
           "schema": {
             "type": "number",
             "minimum": 0
@@ -546,7 +624,9 @@
       "tags": [
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:watch-next"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:watch-next"
+          ]
         }
       ],
       "params": [
@@ -554,7 +634,7 @@
           "name": "title",
           "summary": "The title of this call to action",
           "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/types#/definitions/LocalizedString"
+            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/LocalizedString"
           },
           "required": true
         },
@@ -562,7 +642,7 @@
           "name": "identifiers",
           "summary": "A set of content identifiers for this call to action",
           "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/ContentIdentifiers"
+            "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/ContentIdentifiers"
           },
           "required": true
         },
@@ -581,7 +661,7 @@
             "type": "object",
             "patternProperties": {
               "^.*$": {
-                "$ref": "https://meta.rdkcentral.com/firebolt/schemas/types#/definitions/LocalizedString"
+                "$ref": "https://meta.comcast.com/firebolt/types#/definitions/LocalizedString"
               }
             }
           }
@@ -656,7 +736,9 @@
       "tags": [
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:content-access"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:content-access"
+          ]
         },
         {
           "name": "deprecated",
@@ -672,7 +754,7 @@
           "schema": {
             "type": "array",
             "items": {
-              "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/Entitlement"
+              "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/Entitlement"
             }
           },
           "required": true
@@ -718,7 +800,9 @@
       "tags": [
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:content-access"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:content-access"
+          ]
         }
       ],
       "params": [
@@ -860,7 +944,9 @@
       "tags": [
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:content-access"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:content-access"
+          ]
         }
       ],
       "params": [],
@@ -886,7 +972,9 @@
       "tags": [
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:lifecycle:launch"]
+          "x-uses": [
+            "xrn:firebolt:capability:lifecycle:launch"
+          ]
         }
       ],
       "summary": "Launch or foreground the specified app, and optionally instructs it to navigate to the specified user action. \n For the Primary Experience, the appId can be any one of:  \n\n - xrn:firebolt:application-type:main \n\n - xrn:firebolt:application-type:settings",
@@ -904,7 +992,7 @@
           "required": false,
           "summary": "An optional `NavigationIntent` with details about what part of the app to show first, and context around how/why it was launched",
           "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/intents#/definitions/NavigationIntent"
+            "$ref": "https://meta.comcast.com/firebolt/intents#/definitions/NavigationIntent"
           }
         }
       ],
@@ -1093,7 +1181,7 @@
           "params": [
             {
               "name": "appId",
-              "value": "xrn:firebolt:application-type:main"
+              "value": "xrn:firebolt:application-type:settings"
             },
             {
               "name": "intent",
@@ -1139,11 +1227,11 @@
           }
         },
         {
-          "name": "Launch the Aggregated Experience to the App Store details page for a specfic app with the ID 'foo'.",
+          "name": "Launch the Aggregated Experience to the App Store details page for a specific app with the ID 'foo'.",
           "params": [
             {
               "name": "appId",
-              "value": "xrn:firebolt:application-type:main"
+              "value": "xrn:firebolt:application-type:main "
             },
             {
               "name": "intent",
@@ -1166,45 +1254,44 @@
       ]
     },
     {
-      "name": "navigateTo",
+      "name": "onNavigateTo",
       "tags": [
         {
-          "name": "notifier",
-          "x-event": "Discovery.onNavigateTo"
+          "name": "event"
         },
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:navigate-to"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:navigate-to"
+          ]
         }
       ],
       "summary": "listen to `navigateTo` events",
-      "params": [
-        {
-          "name": "value",
-          "summary": "An object describing where in the app the user intends to navigate to",
-          "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/intents#/definitions/NavigationIntent"
-          }
+      "params": [],
+      "result": {
+        "name": "value",
+        "summary": "An object describing where in the app the user intends to navigate to",
+        "schema": {
+          "$ref": "https://meta.comcast.com/firebolt/intents#/definitions/NavigationIntent"
         }
-      ],
+      },
       "examples": [
         {
           "name": "Listening for `navigateTo` events",
-          "params": [
-            {
-              "name": "event",
-              "value": {
-                "action": "search",
-                "data": {
-                  "query": "a cool show"
-                },
-                "context": {
-                  "campaign": "unknown",
-                  "source": "voice"
-                }
+          "params": [],
+          "result": {
+            "name": "event",
+            "value": {
+              "action": "search",
+              "data": {
+                "query": "a cool show"
+              },
+              "context": {
+                "campaign": "unknown",
+                "source": "voice"
               }
             }
-          ]
+          }
         }
       ]
     },
@@ -1216,7 +1303,9 @@
         },
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:sign-in-status"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:sign-in-status"
+          ]
         }
       ],
       "summary": "Inform the platform that your user is signed in, for increased visibility in search & discovery. Sign-in state is used separately from what content can be access through entitlements and availabilities. Sign-in state may be used when deciding whether to choose this app to handle a user intent. For instance, if the user tries to launch something generic like playing music from an artist, only a signed-in app will be chosen. If the user wants to tune to a channel, only a signed-in app will be chosen to handle that intent. While signIn can optionally include entitlements as those typically change at signIn time, it is recommended to make a separate call to Discovery.contentAccess for entitlements. signIn is not only for when a user explicitly enters login credentials. If an app does not require any credentials from the user to consume content, such as in a free app, then the app should call signIn immediately on launch.",
@@ -1227,7 +1316,7 @@
           "schema": {
             "type": "array",
             "items": {
-              "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/Entitlement"
+              "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/Entitlement"
             }
           },
           "required": false
@@ -1277,7 +1366,9 @@
         },
         {
           "name": "capabilities",
-          "x-uses": ["xrn:firebolt:capability:discovery:sign-in-status"]
+          "x-uses": [
+            "xrn:firebolt:capability:discovery:sign-in-status"
+          ]
         }
       ],
       "summary": "Inform the platform that your user has signed out. See `Discovery.signIn` for more details on how the sign-in state is used.signOut will NOT clear entitlements, the app should make a separate call to Discovery.clearContentAccess. Apps should also call signOut when a login token has expired and the user is now in a signed-out state.",
@@ -1300,127 +1391,85 @@
       ]
     },
     {
-      "name": "signIn",
+      "name": "onSignIn",
       "tags": [
         {
-          "name": "notifier",
-          "x-event": "Discovery.onSignIn"
+          "name": "event"
         },
         {
           "name": "capabilities",
-          "x-manages": ["xrn:firebolt:capability:discovery:sign-in-status"]
+          "x-manages": [
+            "xrn:firebolt:capability:discovery:sign-in-status"
+          ]
         }
       ],
       "summary": "Listen to events from all apps that call Discovery.signIn",
-      "params": [
-        {
-          "name": "event",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "appId": {
-                "type": "string"
-              }
-            },
-            "required": ["appId"]
-          }
-        }
-      ],
-      "examples": [
-        {
-          "name": "Default Example",
-          "params": [
-            {
-              "name": "Default Event",
-              "value": {
-                "appId": "firecert"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "signOut",
-      "tags": [
-        {
-          "name": "notifier",
-          "x-event": "Discovery.onSignOut"
-        },
-        {
-          "name": "capabilities",
-          "x-manages": ["xrn:firebolt:capability:discovery:sign-in-status"]
-        }
-      ],
-      "summary": "Listen to events from all apps that call Discovery.signOut",
-      "params": [
-        {
-          "name": "event",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "appId": {
-                "type": "string"
-              }
-            },
-            "required": ["appId"]
-          }
-        }
-      ],
-      "examples": [
-        {
-          "name": "Default Example",
-          "params": [
-            {
-              "name": "Default Event",
-              "value": {
-                "appId": "firecert"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "provideInterest",
-      "tags": [
-        {
-          "name": "registration",
-          "x-interface": "Interest"
-        },
-        {
-          "name": "capabilities",
-          "x-provides": "xrn:firebolt:capability:discovery:interest"
-        }
-      ],
-      "summary": "Register an app's Interest interface.",
-      "params": [
-        {
-          "name": "enabled",
-          "required": true,
-          "schema": {
-            "type": "boolean"
-          }
-        }
-      ],
+      "params": [],
       "result": {
-        "name": "result",
+        "name": "event",
         "schema": {
-          "const": null
+          "type": "object",
+          "properties": {
+            "appId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "appId"
+          ]
         }
       },
       "examples": [
         {
           "name": "Default Example",
-          "params": [
-            {
-              "name": "enabled",
-              "value": true
-            }
-          ],
+          "params": [],
           "result": {
-            "name": "result",
-            "value": null
+            "name": "Default Event",
+            "value": {
+              "appId": "firecert"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "onSignOut",
+      "tags": [
+        {
+          "name": "event"
+        },
+        {
+          "name": "capabilities",
+          "x-manages": [
+            "xrn:firebolt:capability:discovery:sign-in-status"
+          ]
+        }
+      ],
+      "summary": "Listen to events from all apps that call Discovery.signOut",
+      "params": [],
+      "result": {
+        "name": "event",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "appId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "appId"
+          ]
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [],
+          "result": {
+            "name": "Default Event",
+            "value": {
+              "appId": "firecert"
+            }
           }
         }
       ]
@@ -1439,80 +1488,21 @@
           "name": "type",
           "required": true,
           "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/InterestType"
+            "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/InterestType"
           }
         },
         {
           "name": "reason",
           "required": true,
           "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/InterestReason"
-          }
-        }
-      ],
-      "result": {
-        "name": "entity",
-        "schema": {
-          "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entity#/definitions/EntityDetails"
-        }
-      },
-      "examples": [
-        {
-          "name": "Default Example",
-          "params": [
-            {
-              "name": "type",
-              "value": "interest"
-            },
-            {
-              "name": "reason",
-              "value": "playlist"
-            }
-          ],
-          "result": {
-            "name": "entity",
-            "value": {
-              "identifiers": {
-                "entityId": "345",
-                "entityType": "program",
-                "programType": "movie"
-              },
-              "info": {}
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "userInterest",
-      "tags": [
-        {
-          "name": "capabilities",
-          "x-provides": "xrn:firebolt:capability:discovery:interest",
-          "x-push": true
-        }
-      ],
-      "summary": "Provide information about the entity currently displayed or selected on the screen.",
-      "description": "Provide information about the entity currently displayed or selected on the screen.",
-      "params": [
-        {
-          "name": "type",
-          "required": true,
-          "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/InterestType"
-          }
-        },
-        {
-          "name": "reason",
-          "required": true,
-          "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/InterestReason"
+            "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/InterestReason"
           }
         },
         {
           "name": "entity",
+          "required": true,
           "schema": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entity#/definitions/EntityDetails"
+            "$ref": "https://meta.comcast.com/firebolt/entity#/definitions/EntityDetails"
           }
         }
       ],
@@ -1542,6 +1532,35 @@
                   "entityType": "program",
                   "programType": "movie"
                 },
+                "info": {}
+              }
+            }
+          ],
+          "result": {
+            "name": "result",
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Discovery.onRequestUserInterest",
+      "tags": [
+        {
+          "name": "rpc-only"
+        },
+        {
+          "name": "event",
+          "x-response-name": "entity",
+          "x-response": {
+            "$ref": "https://meta.comcast.com/firebolt/entity#/definitions/EntityDetails",
+            "examples": [
+              {
+                "identifiers": {
+                  "entityId": "345",
+                  "entityType": "program",
+                  "programType": "movie"
+                },
                 "info": {
                   "title": "Cool Runnings",
                   "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
@@ -1558,11 +1577,49 @@
                   ]
                 }
               }
-            }
+            ]
+          }
+        },
+        {
+          "name": "capabilities",
+          "x-provides": "xrn:firebolt:capability:discovery:interest"
+        }
+      ],
+      "summary": "Provide information about the entity currently displayed or selected on the screen.",
+      "description": "Provide information about the entity currently displayed or selected on the screen.",
+      "params": [],
+      "result": {
+        "name": "request",
+        "schema": {
+          "type": "object",
+          "required": [
+            "correlationId",
+            "parameters"
           ],
+          "properties": {
+            "correlationId": {
+              "type": "string"
+            },
+            "parameters": {
+              "$ref": "#/components/schemas/UserInterestProviderParameters"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [],
           "result": {
-            "name": "result",
-            "value": null
+            "name": "request",
+            "value": {
+              "correlationId": "xyz",
+              "parameters": {
+                "type": "interest",
+                "reason": "playlist"
+              }
+            }
           }
         }
       ]
@@ -1601,9 +1658,14 @@
             "type": "string"
           }
         },
-        "required": ["correlationId"],
+        "required": [
+          "correlationId"
+        ],
         "propertyNames": {
-          "enum": ["correlationId", "parameters"]
+          "enum": [
+            "correlationId",
+            "parameters"
+          ]
         },
         "examples": [
           {
@@ -1619,9 +1681,15 @@
             "type": "string"
           }
         },
-        "required": ["correlationId", "result"],
+        "required": [
+          "correlationId",
+          "result"
+        ],
         "propertyNames": {
-          "enum": ["correlationId", "result"]
+          "enum": [
+            "correlationId",
+            "result"
+          ]
         },
         "examples": [
           {
@@ -1642,7 +1710,10 @@
                 "$ref": "#/components/schemas/EntityInfoParameters"
               }
             },
-            "required": ["correlationId", "parameters"]
+            "required": [
+              "correlationId",
+              "parameters"
+            ]
           }
         ],
         "examples": [
@@ -1665,7 +1736,9 @@
             "type": "string"
           }
         },
-        "required": ["entityId"],
+        "required": [
+          "entityId"
+        ],
         "additionalProperties": false,
         "examples": [
           {
@@ -1683,7 +1756,7 @@
             "type": "object",
             "properties": {
               "result": {
-                "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/EntityInfoResult"
+                "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/EntityInfoResult"
               }
             }
           }
@@ -1699,16 +1772,19 @@
             "format": "date-time"
           },
           "entity": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/EntityInfo"
+            "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/EntityInfo"
           },
           "related": {
             "type": "array",
             "items": {
-              "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/EntityInfo"
+              "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/EntityInfo"
             }
           }
         },
-        "required": ["expires", "entity"],
+        "required": [
+          "expires",
+          "entity"
+        ],
         "additionalProperties": false
       },
       "PurchasedContentFederatedRequest": {
@@ -1724,7 +1800,10 @@
                 "$ref": "#/components/schemas/PurchasedContentParameters"
               }
             },
-            "required": ["correlationId", "parameters"]
+            "required": [
+              "correlationId",
+              "parameters"
+            ]
           }
         ],
         "examples": [
@@ -1745,13 +1824,15 @@
             "minimum": -1
           },
           "offeringType": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/OfferingType"
+            "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/OfferingType"
           },
           "programType": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/ProgramType"
+            "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/ProgramType"
           }
         },
-        "required": ["limit"],
+        "required": [
+          "limit"
+        ],
         "additionalProperties": false,
         "examples": [
           {
@@ -1769,7 +1850,7 @@
             "type": "object",
             "properties": {
               "result": {
-                "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/PurchasedContentResult"
+                "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/PurchasedContentResult"
               }
             }
           }
@@ -1790,11 +1871,15 @@
           "entries": {
             "type": "array",
             "items": {
-              "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/EntityInfo"
+              "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/EntityInfo"
             }
           }
         },
-        "required": ["expires", "totalCount", "entries"],
+        "required": [
+          "expires",
+          "totalCount",
+          "entries"
+        ],
         "additionalProperties": false
       },
       "Availability": {
@@ -1803,7 +1888,10 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["channel-lineup", "program-lineup"]
+            "enum": [
+              "channel-lineup",
+              "program-lineup"
+            ]
           },
           "id": {
             "type": "string"
@@ -1820,7 +1908,10 @@
             "format": "date-time"
           }
         },
-        "required": ["type", "id"]
+        "required": [
+          "type",
+          "id"
+        ]
       },
       "ContentAccessIdentifiers": {
         "title": "ContentAccessIdentifiers",
@@ -1836,7 +1927,7 @@
           "entitlements": {
             "type": "array",
             "items": {
-              "$ref": "https://meta.rdkcentral.com/firebolt/schemas/entertainment#/definitions/Entitlement"
+              "$ref": "https://meta.comcast.com/firebolt/entertainment#/definitions/Entitlement"
             },
             "description": "A list of identifiers that represent what content is consumable for the subscriber. Excluding entitlements will cause no change to the entitlements that are stored for this subscriber. Providing an empty array will clear the subscriber's entitlements"
           }
@@ -1847,18 +1938,23 @@
         "title": "TuneChannels",
         "description": "An enumeration of xrn values for the TuneIntent that have special meaning.",
         "type": "string",
-        "enum": ["xrn:firebolt:channel:any"]
+        "enum": [
+          "xrn:firebolt:channel:any"
+        ]
       },
       "UserInterestProviderParameters": {
         "title": "UserInterestProviderParameters",
         "type": "object",
-        "required": ["type", "reason"],
+        "required": [
+          "type",
+          "reason"
+        ],
         "properties": {
           "type": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/InterestType"
+            "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/InterestType"
           },
           "reason": {
-            "$ref": "https://meta.rdkcentral.com/firebolt/schemas/discovery#/definitions/InterestReason"
+            "$ref": "https://meta.comcast.com/firebolt/discovery#/definitions/InterestReason"
           }
         }
       }
